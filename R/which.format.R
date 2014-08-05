@@ -64,6 +64,7 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'  .which.format("2014/02/16")
 #'    
 #' @note Internal function
+#' @rdname which.format
    
 .which.format <- function(txt) {
   

@@ -13,7 +13,7 @@ this parameter is NA, then the function will try to guess the format
 for each value}
 }
 \value{
-vector of POSIXct values (or NA, if a value cannot be parsed)
+POSIXct vector (or NA, if a value cannot be parsed)
 }
 \description{
 Convers character to POSIXct
@@ -27,6 +27,6 @@ Convers character to POSIXct
  as.POSIXct.character( dts )
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
+\code{\link[base]{as.POSIXct}}
 }
 
