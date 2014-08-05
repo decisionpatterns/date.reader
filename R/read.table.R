@@ -8,7 +8,7 @@
 #' value into POSIXct objects.  Otherwise, it acts as utils::read.table
 #'
 #' @seealso 
-#'   \code{\link[base]{as.POSIX}}
+#'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples
 #'   # -tk
