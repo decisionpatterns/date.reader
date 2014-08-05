@@ -4,31 +4,19 @@
 \title{type.convert}
 \usage{
 type.convert(x, ...)
-
-type.convert(x, ...)
 }
 \arguments{
-\item{x}{vector of character; values to parse}
-
 \item{x}{vector of character; values to parse}
 }
 \value{
 vector of parsed values. If the values
 can be interpreted as dates, it returns a vector
 of POSIXct objects. Otherwise, it calls utils::type.convert
-
-vector of parsed values. If the values
-can be interpreted as dates, it returns a vector
-of POSIXct objects. Otherwise, it calls utils::type.convert
 }
 \description{
 type.convert
-
-type.convert
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
-
 \code{\link[base]{as.POSIX}}
 }
 

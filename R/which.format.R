@@ -1,8 +1,10 @@
 #' which.format
 #' 
 #' @param x vector of characters; values to convert to a POSIX date
+#' 
 #' @param nTrials integer; number of strings to check before deciding
 #' the format
+#' 
 #' @param nErrors integer; the number of unparsable strings to allow. 
 #' If the number of unparseable strings exceeds nErrors, return NA,
 #' which means that the strings are either not dates, or not a consistent
@@ -20,11 +22,12 @@
 #'  which.format(x, nTrials=3, nErrors=1)
 #'    
 #' @note Internal function
-#'   
+  
 which.format <- function(x, nTrials=1, nErrors=0) {
+  
   nTrials.actual <- min(length(x), nTrials)
   z <- x[1:nTrials.actual]
-  formats <- unlist(lapply(z, which.format.aux))
+  formats <- unlist(lapply(z, .which.format))
   w <- table(formats)
   if (length(w) == 0) {
     return(NA)
@@ -42,10 +45,11 @@ which.format <- function(x, nTrials=1, nErrors=0) {
     }
   }
   return(format)
+  
 }
 
 
-#' which.format.aux
+#' .which.format
 #' 
 #' @param txt character; value to convert to a POSIXct date
 #'
@@ -56,12 +60,13 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  which.format.aux("January 11, 2014")
-#'  which.format.aux("2014/02/16")
+#'  .which.format("January 11, 2014")
+#'  .which.format("2014/02/16")
 #'    
 #' @note Internal function
-#'   
-which.format.aux <- function(txt) {
+   
+.which.format <- function(txt) {
+  
   for (fmt in kFormatNames) {
     if (grepl("YYYY", fmt)) {
       if (grepl("[^0-9]", txt)) {
@@ -74,4 +79,5 @@ which.format.aux <- function(txt) {
     }
   }
   return(NA)
+  
 }

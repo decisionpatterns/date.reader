@@ -4,31 +4,23 @@
 \title{read.table}
 \usage{
 read.table(...)
-
-read.table(...)
 }
 \arguments{
-\item{file}{character; path to a file to be read in}
-
-\item{file}{character; path to a file to be read in}
+\item{...}{additional arguments passed to \code{utils::read.table}}
 }
 \value{
-data frame. If a column can be interpreted as
-dates, then it translates the value into POSIXct objects.
-Otherwise, it acts as utils::read.table
+data frame.
 
-data frame. If a column can be interpreted as
-dates, then it translates the value into POSIXct objects.
-Otherwise, it acts as utils::read.table
+If a character column can be interpreted as dates, then it translates the
+value into POSIXct objects.  Otherwise, it acts as utils::read.table
 }
 \description{
 read.table
-
-read.table
+}
+\examples{
+# -tk
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
-
 \code{\link[base]{as.POSIX}}
 }
 

@@ -4,17 +4,9 @@
 \title{as.POSIXct.character}
 \usage{
 \method{as.POSIXct}{character}(x, fmt = NA)
-
-\method{as.POSIXct}{character}(x, fmt = NA)
 }
 \arguments{
-\item{x}{vector of character; values to convert to a POSIX date}
-
-\item{fmt}{character; name of the format for the values. If
-this parameter is NA, then the function will try to guess the format
-for each value}
-
-\item{x}{vector of character; values to convert to a POSIX date}
+\item{x}{character; vector to convert to a POSIX date}
 
 \item{fmt}{character; name of the format for the values. If
 this parameter is NA, then the function will try to guess the format
@@ -22,29 +14,19 @@ for each value}
 }
 \value{
 vector of POSIXct values (or NA, if a value cannot be parsed)
-
-vector of POSIXct values (or NA, if a value cannot be parsed)
 }
 \description{
-as.POSIXct.character
-
-as.POSIXct.character
+Convers character to POSIXct
 }
 \examples{
 # -tk
  dts <- c( '20140210', '19791118', '19720329' )
- dts <- rep( '20140210', 100 )
- dts <- c( '14-02-10', '79-11-18' )
  as.POSIXct.character( dts )
-# -tk
- dts <- c( '20140210', '19791118', '19720329' )
  dts <- rep( '20140210', 100 )
- dts <- c( '14-02-10', '79-11-18' )
+ dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
  as.POSIXct.character( dts )
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
-
 \code{\link[base]{as.POSIX}}
 }
 
