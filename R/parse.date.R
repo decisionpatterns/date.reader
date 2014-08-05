@@ -11,8 +11,9 @@
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  .parse.date("January 11, 2014", "MDY")
-#'  .parse.date("2014/02/16", "YMD")
+#'  .parse.date( "January 11, 2014", "MDY" )
+#'  .parse.date( "2014/02/16", "YMD" )
+#'  .parse.date( "2014-08-05", "YMD" )
 #'    
 #' @note Internal function, a wrapper for lubridate functions
 #' @rdname parse.date 
