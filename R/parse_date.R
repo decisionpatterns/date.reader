@@ -108,6 +108,18 @@ get_formats <- function(txt) {
 }
 
 
+#' 
+#' 
+
+date.format <- function(x) { 
+
+  
+
+
+
+}
+
+
 #' as.POSIXlt.character
 #' 
 #' @param x character; value to convert to a POSIX date
@@ -132,14 +144,9 @@ as.posix <- function(x) {
   retval <- NA
   formats <- get_formats(x)
   
-  
   for ( f in formats ) {
     value = f( x, quiet=TRUE )
-    if( is.na(value) ) {
-      next
-    }
-    retval <- value
-    break
+    if( all( ! is.na(value) ) ) break 
   }
   
   return(retval)
