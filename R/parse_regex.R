@@ -235,10 +235,10 @@ kLubridateFormats <- c(
 )
 
 kFormatNames <- c(
+    "YYYYMMDD_HHMMSS",
+    "YYYYMMDD_HHMM",
+    "YYYYMMDD_HH",
     "YYYYMMDD",
-    "YYYYMMDD_H",
-    "YYYYMMDD_HM",
-    "YYYYMMDD_HMS",
     "DMY_HMS",
     "DMY_HM",
     "DMY_H",
