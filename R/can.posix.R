@@ -18,6 +18,6 @@
 #' @export
 
 can.posix <- function(x, nTrials=kTrials, nErrors=kErrors) {
-  fmt <- which.format(x, nTrials=kTrials, nErrors=kErrors)
+  fmt <- which.format(x, nTrials=nTrials, nErrors=nErrors)
   return (! is.na(fmt))
 }
