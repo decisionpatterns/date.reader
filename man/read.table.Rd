@@ -21,6 +21,6 @@ read.table
 # -tk
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
+\code{\link[base]{as.POSIXct}}
 }
 

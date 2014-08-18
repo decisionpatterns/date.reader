@@ -74,7 +74,7 @@ which.format <- function(x, nTrials=1, nErrors=0) {
         next
       }
     }
-    z <- parse.date.aux(txt, fmt)
+    z <- .parse.date(txt, fmt)
     if (! is.na(z)) {
       return(fmt)
     }

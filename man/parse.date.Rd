@@ -21,8 +21,9 @@ if the input cannot be parsed.
 Internal function, a wrapper for lubridate functions
 }
 \examples{
-.parse.date("January 11, 2014", "MDY")
- .parse.date("2014/02/16", "YMD")
+.parse.date( "January 11, 2014", "MDY" )
+ .parse.date( "2014/02/16", "YMD" )
+ .parse.date( "2014-08-05", "YMD" )
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

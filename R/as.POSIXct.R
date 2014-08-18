@@ -16,11 +16,14 @@
 #'   
 #' @examples 
 #'   # -tk
-#'  dts <- c( '20140210', '19791118', '19720329' ) 
-#'  as.POSIXct.character( dts )  
-#'  dts <- rep( '20140210', 100 )
+#'  dts <- c( '20140210', '19791118', '19720329' )  
+#'  as.POSIXct( dts ) 
+#'      
+#'  dts <- rep( '20140210', 10 )
+#'  as.POSIXct( dts )  
+#'   
 #'  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
-#'  as.POSIXct.character( dts )  
+#'  as.POSIXct( dts )  
 #'    
 #' @export
 
