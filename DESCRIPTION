@@ -1,7 +1,7 @@
 Package: date.reader
 Title: This packages extends type.convert and read.table to automatically detect
     and coerce date fields to POSIX.
-Version: 0.1
+Version: 0.2
 Author: "DecisionPatterns [aut, cre]"
 Maintainer: Daryl McCullough <dmcullough@decisionpatterns.com>
 Description: date.reader provides replacement type.convert and read.table
@@ -10,5 +10,5 @@ Description: date.reader provides replacement type.convert and read.table
 Depends:
     R (>= 3.1.0),
     lubridate (>= 1.3.3)
-License: GPL (= 2)
+License: GPL (>= 2)
 LazyData: true

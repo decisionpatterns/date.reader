@@ -6,7 +6,7 @@
 can.posix(x, nTrials = kTrials, nErrors = kErrors)
 }
 \arguments{
-\item{x}{vector of character; values to parse}
+\item{x}{character; values to parse}
 
 \item{nTrials}{integer; number of strings to check before deciding
 the format}
@@ -23,5 +23,11 @@ be interpreted as dates, or if there is no consistent format.
 }
 \description{
 can.posix
+}
+\examples{
+# -tk
+}
+\seealso{
+\code{\link{which.format}}
 }
 

@@ -3,12 +3,12 @@
 \alias{.parse.date}
 \title{.parse.date}
 \usage{
-.parse.date(txt, fmt)
+.parse.date(txt, format)
 }
 \arguments{
 \item{txt}{character; value to convert to a POSIX date}
 
-\item{fmt}{character; name of the format, e.g. "MDY"}
+\item{format}{character; name of the format, e.g. "MDY"}
 }
 \value{
 POSIXct object representing a date (or date-time), or NA

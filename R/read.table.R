@@ -4,10 +4,11 @@
 #'
 #' @return data frame. 
 #' 
-#' If a character column can be interpreted as dates, then it translates the 
-#' value into POSIXct objects.  Otherwise, it acts as utils::read.table
+#' Same as \code{utils::read.table} except when a character or factor column can
+#' be coerced to a POSIXct date. 
 #'
 #' @seealso 
+#'   \code{\link[utils]{read.table}}
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples
@@ -22,9 +23,10 @@ read.table <- function(...) {
   for (col.idx in seq_len(ncol(dat))) {
     
     x <- dat[, col.idx]
-    fmt <- which.format(x)
-    if (!is.na(fmt)) {
-      x <- as.POSIXct(x, fmt=fmt)
+    format <- which.format(x)
+    
+    if (!is.na(format)) {
+      x <- as.POSIXct( x, format=format )
       dat[, col.idx] <- x
       break
     }

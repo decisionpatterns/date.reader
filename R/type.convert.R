@@ -1,21 +1,30 @@
 #' type.convert
 #' 
-#' @param x vector of character; values to parse
+#' @param x character; 
 #'
-#' @return vector of parsed values. If the values
-#' can be interpreted as dates, it returns a vector
-#' of POSIXct objects. Otherwise, it calls utils::type.convert
+#' @return a vector of parsed values. If values
+#' can be interpreted as dates, returns a POSIXct vector otherwise, the values 
+#' from utils::type.convert
 #'
 #' 
 #' @seealso 
 #'   \code{\link[base]{as.POSIX}}
+#' 
+#' @examples 
+#'   x <- type.convert( c("2014-08-05" ) )
+#'   x
+#'   class(x)  # "POSIXct" "POSIXt" 
 #'   
 #' @export
 
 type.convert <- function(x, ...) {
-  fmt <- which.format(x, nTrials=kTrials, nErrors=kErrors)
-  if (is.na(fmt)) {
-    return(utils::type.convert(x, ...))
+  
+  format <- which.format(x, nTrials=kTrials, nErrors=kErrors)
+  
+  if ( is.na(format) ) {
+    return( utils::type.convert(x, ...) )
   }
-  return(as.POSIXct.character(x, fmt=fmt))
+  
+  return( as.POSIXct.character(x, format=format) )
+
 }

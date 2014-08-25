@@ -1,6 +1,6 @@
 #' which.format
 #' 
-#' @param x vector of characters; values to convert to a POSIX date
+#' @param x character; values to convert to a POSIX date
 #' 
 #' @param nTrials integer; number of strings to check before deciding
 #' the format
@@ -11,7 +11,7 @@
 #' format.
 #'
 #' @return 
-#' character representing the name of the date format
+#'   character, name for the date format
 #'
 #' @seealso 
 #'   \code{\link[base]{as.POSIX}}
@@ -29,21 +29,26 @@ which.format <- function(x, nTrials=1, nErrors=0) {
   z <- x[1:nTrials.actual]
   formats <- unlist(lapply(z, .which.format))
   w <- table(formats)
+  
   if (length(w) == 0) {
     return(NA)
   }
+  
   n <-max(w)
   format <- names(which(w==n))
   format <- format[[1]]
   nErrors.actual <- nTrials.actual - n
+  
   if (nErrors.actual > nErrors) {
     return(NA)
   }
+  
   if (grepl("YYYY", format)) {
     if (nTrials.actual < nTrials) {
       return(NA)
     }
   }
+  
   return(format)
   
 }
@@ -63,7 +68,7 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'  .which.format("January 11, 2014")
 #'  .which.format("2014/02/16")
 #'    
-#' @note Internal function
+#' @note Internal function that is not exported
 #' @rdname which.format
    
 .which.format <- function(txt) {

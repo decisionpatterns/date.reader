@@ -3,12 +3,12 @@
 \alias{as.POSIXct.character}
 \title{as.POSIXct.character}
 \usage{
-\method{as.POSIXct}{character}(x, fmt = NA)
+\method{as.POSIXct}{character}(x, format = NA)
 }
 \arguments{
 \item{x}{character; vector to convert to a POSIX date}
 
-\item{fmt}{character; name of the format for the values. If
+\item{format}{character; name of the format for the values. If
 this parameter is NA, then the function will try to guess the format
 for each value}
 }
@@ -28,8 +28,11 @@ Convers character to POSIXct
 
  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
  as.POSIXct( dts )
+
+ as.POSIXct( dts, format='ymd' )
 }
 \seealso{
-\code{\link[base]{as.POSIXct}}
+\code{\link[base]{as.POSIXct}} \cr
+  \code{\link[base]{strptime}} for \code{format} strings
 }
 

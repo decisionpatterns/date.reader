@@ -6,15 +6,20 @@
 type.convert(x, ...)
 }
 \arguments{
-\item{x}{vector of character; values to parse}
+\item{x}{character;}
 }
 \value{
-vector of parsed values. If the values
-can be interpreted as dates, it returns a vector
-of POSIXct objects. Otherwise, it calls utils::type.convert
+a vector of parsed values. If values
+can be interpreted as dates, returns a POSIXct vector otherwise, the values
+from utils::type.convert
 }
 \description{
 type.convert
+}
+\examples{
+x <- type.convert( c("2014-08-05" ) )
+  x
+  class(x)  # "POSIXct" "POSIXt"
 }
 \seealso{
 \code{\link[base]{as.POSIX}}

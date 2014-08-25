@@ -9,7 +9,7 @@ which.format(x, nTrials = 1, nErrors = 0)
 .which.format(txt)
 }
 \arguments{
-\item{x}{vector of characters; values to convert to a POSIX date}
+\item{x}{character; values to convert to a POSIX date}
 
 \item{nTrials}{integer; number of strings to check before deciding
 the format}
@@ -22,7 +22,7 @@ format.}
 \item{txt}{character; value to convert to a POSIXct date}
 }
 \value{
-character representing the name of the date format
+character, name for the date format
 
 character representing the name of the date format
 }
@@ -34,7 +34,7 @@ which.format
 \note{
 Internal function
 
-Internal function
+Internal function that is not exported
 }
 \examples{
 # -tk

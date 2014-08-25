@@ -4,7 +4,7 @@
 #' 
 #' @param x character; vector to convert to a POSIX date
 #' 
-#' @param fmt character; name of the format for the values. If
+#' @param format character; name of the format for the values. If
 #' this parameter is NA, then the function will try to guess the format
 #' for each value
 #'
@@ -12,7 +12,8 @@
 #'   POSIXct vector (or NA, if a value cannot be parsed)
 #'
 #' @seealso 
-#'   \code{\link[base]{as.POSIXct}}
+#'   \code{\link[base]{as.POSIXct}} \cr
+#'   \code{\link[base]{strptime}} for \code{format} strings
 #'   
 #' @examples 
 #'   # -tk
@@ -24,19 +25,21 @@
 #'   
 #'  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
 #'  as.POSIXct( dts )  
+#'  
+#'  as.POSIXct( dts, format='ymd' )
 #'    
 #' @export
 
-as.POSIXct.character <- function( x, fmt=NA ) {
+as.POSIXct.character <- function( x, format=NA ) {
   
   f <- function(txt) {
-    if ( is.na(fmt) ) {
-      fmt <- which.format(txt)
+    if ( is.na(format) ) {
+      format <- which.format(txt)
     }
-    if ( is.na(fmt) ) {
+    if ( is.na(format) ) {
       return(NA)
     }
-    return( .parse.date(txt, fmt) )
+    return( .parse.date(txt, format) )
   }
   
   result <- lapply(x,f)

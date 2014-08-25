@@ -1,6 +1,6 @@
 #' can.posix
 #' 
-#' @param x vector of character; values to parse
+#' @param x character; values to parse
 #'
 #' @param nTrials integer; number of strings to check before deciding
 #' the format
@@ -10,14 +10,22 @@
 #' which means that the strings are either not dates, or not a consistent
 #' format.
 #'
+#'
 #' @return logical. If the values can be interpreted as dates (with
 #' the same format), it returns TRUE. It returns false if they cannot 
 #' be interpreted as dates, or if there is no consistent format.
 #'
+#' @seealso 
+#'   \code{\link{which.format}}
 #'   
+#' @examples 
+#'   # -tk
+#'      
 #' @export
 
 can.posix <- function(x, nTrials=kTrials, nErrors=kErrors) {
-  fmt <- which.format(x, nTrials=nTrials, nErrors=nErrors)
-  return (! is.na(fmt))
+  
+  format <- which.format(x, nTrials=nTrials, nErrors=nErrors)
+  return (! is.na(format))
+  
 }

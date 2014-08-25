@@ -1,7 +1,7 @@
 #' .parse.date
 #' 
 #' @param txt character; value to convert to a POSIX date
-#' @param fmt character; name of the format, e.g. "MDY"
+#' @param format character; name of the format, e.g. "MDY"
 #'
 #' @return 
 #' POSIXct object representing a date (or date-time), or NA
@@ -18,25 +18,25 @@
 #' @note Internal function, a wrapper for lubridate functions
 #' @rdname parse.date 
 
-.parse.date <- function(txt, fmt) {
+.parse.date <- function(txt, format) {
   
-  txt <- gsub("a.m.", "am", txt, ignore.case=TRUE)
-  txt <- gsub("p.m.", "pm", txt, ignore.case=TRUE)
+  txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
+  txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
 
   suppressWarnings(
     tryCatch({
-      format <- lookup.format(fmt)
+      format <- lookup.format(format)
       if (is.na(format)) {
         return(NA)
       }
       if (! grepl(format, txt, ignore.case=TRUE)) {
         return(NA)
       }
-      f <- lookup.lubridate.fun(fmt)
+      f <- lookup.lubridate.fun(format)
       if (is.na(f)) {
           return(NA)
       }
-      return(f(txt))
+      return( f(txt) )
     }))
   return(NA)
 }

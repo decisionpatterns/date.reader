@@ -11,8 +11,8 @@ read.table(...)
 \value{
 data frame.
 
-If a character column can be interpreted as dates, then it translates the
-value into POSIXct objects.  Otherwise, it acts as utils::read.table
+Same as \code{utils::read.table} except when a character or factor column can
+be coerced to a POSIXct date.
 }
 \description{
 read.table
@@ -21,6 +21,7 @@ read.table
 # -tk
 }
 \seealso{
-\code{\link[base]{as.POSIXct}}
+\code{\link[utils]{read.table}}
+  \code{\link[base]{as.POSIXct}}
 }
 
