@@ -72,9 +72,8 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #' @rdname which.format
    
 .which.format <- function(txt) {
-  
-  for (fmt in kFormatNames) {
-    if (grepl("YYYY", fmt)) {
+  for (fmt in names(kFormats)) {
+    if (grepl(".numeric", fmt)) {
       if (grepl("[^0-9]", txt)) {
         next
       }
