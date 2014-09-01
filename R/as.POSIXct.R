@@ -34,9 +34,12 @@
 #' @export
 #' 
 
-string.to.POSIXct <- function( x, format=NA, tz="", ... ) {
+string.to.POSIXct <- function( x, format=NA, tz="UTC" ) {
+  
   if (is.na(format)) {
     check.regex <- TRUE
+  } else {
+    check.regex <- FALSE
   }
   
   f <- function(txt) {
@@ -46,15 +49,14 @@ string.to.POSIXct <- function( x, format=NA, tz="", ... ) {
     if ( is.na(format) ) {
       return(NA)
     }
-    return( .parse.date(txt, format, tz=tz, check.regex=check.regex, ...) )
+    result <- .parse.date(txt, format, tz=tz, check.regex=check.regex)
+    return(result)
   }
   x <- as.character(x)
-  
   result <- lapply(x,f)
   result <- do.call(c,result)
   
   return(result)
-  
 }
 
 #' as.POSIXct.character
@@ -87,6 +89,10 @@ string.to.POSIXct <- function( x, format=NA, tz="", ... ) {
 #' @export
 #' 
 
-as.POSIXct.character <- function( x, tz="", ... ) {
-  return(string.to.POSIXct(x, tz=tz, ...))
+as.POSIXct.character <- function( x, tz="UTC", ... ) {
+  fmt <- which.format(x)
+  if (is.na(fmt)) {
+    return(NA)
+  }
+  return(string.to.POSIXct(x, tz=tz, format=fmt, ...))
 }

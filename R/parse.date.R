@@ -20,8 +20,8 @@
 #' @note Internal function, a wrapper for lubridate functions
 #' @rdname parse.date 
 
-.parse.date <- function(txt, format, tz="", check.regex=TRUE, ...) {
-  
+.parse.date <- function(txt, format, tz="UTC", check.regex=TRUE) {
+
   txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
   txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
   if (check.regex) {
@@ -39,8 +39,10 @@
   if (is.na(f)) {
       return(NA)
   })
+
   suppressWarnings({
-    return( f(txt, tz=tz, ...) )
+    result <- f(txt, tz=tz)
+    return( result )
   }
   )
 }

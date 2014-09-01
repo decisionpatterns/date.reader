@@ -15,7 +15,7 @@
 #'      
 #' @export
 
-read.table <- function(...) {
+read.table <- function(file, ...) {
 
   args <- list(...)
 
@@ -25,7 +25,7 @@ read.table <- function(...) {
   nonempty.names <- setdiff(nams, "")
   named.colClass.elements <- (length(nonempty.names) > 0)
 
-  dat <- utils::read.table(...)
+  dat <- utils::read.table(file, ...)
   nams <- names(dat)
   cls.index <- 0
   as.is <- args[['as.is']]
@@ -80,7 +80,7 @@ read.table <- function(...) {
     x <- dat[, col.idx]
     fmt <- which.format(x)
     if (!is.na(fmt)) {
-      x <- string.to.POSIXct(x, format=fmt, ...)
+      x <- string.to.POSIXct(x, format=fmt)
       dat[, col.idx] <- x
       break
     }
