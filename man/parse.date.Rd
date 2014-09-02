@@ -3,7 +3,7 @@
 \alias{.parse.date}
 \title{.parse.date}
 \usage{
-.parse.date(txt, format)
+.parse.date(txt, format, tz = "UTC", check.regex = TRUE)
 }
 \arguments{
 \item{txt}{character; value to convert to a POSIX date}
@@ -21,9 +21,11 @@ if the input cannot be parsed.
 Internal function, a wrapper for lubridate functions
 }
 \examples{
-.parse.date( "January 11, 2014", "MDY" )
- .parse.date( "2014/02/16", "YMD" )
- .parse.date( "2014-08-05", "YMD" )
+date.reader:::.parse.date( "January 11, 2014", "MDY" )
+ date.reader:::.parse.date( "2014/02/16", "YMD" )
+ date.reader:::.parse.date( "2014-08-05", "YMD" )
+ date.reader:::.parse.date( "20140805", "ymd.numeric")
+ date.reader:::.parse.date( "14/08/05", "ymd.alt")
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

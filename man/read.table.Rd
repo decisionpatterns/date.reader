@@ -3,7 +3,7 @@
 \alias{read.table}
 \title{read.table}
 \usage{
-read.table(...)
+read.table(file, ...)
 }
 \arguments{
 \item{...}{additional arguments passed to \code{utils::read.table}}
@@ -11,8 +11,8 @@ read.table(...)
 \value{
 data frame.
 
-Same as \code{utils::read.table} except when a character or factor column can
-be coerced to a POSIXct date.
+If a character column can be interpreted as dates, then it translates the
+value into POSIXct objects.  Otherwise, it acts as utils::read.table
 }
 \description{
 read.table
@@ -21,7 +21,6 @@ read.table
 # -tk
 }
 \seealso{
-\code{\link[utils]{read.table}}
-  \code{\link[base]{as.POSIXct}}
+\code{\link[base]{as.POSIXct}}
 }
 

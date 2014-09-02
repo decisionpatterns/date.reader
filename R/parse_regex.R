@@ -20,6 +20,8 @@ kOptionalDayName <- paste(
 
 kDay <- "(the\\s+)?[0-3]?\\d((rd)|(th)|(st))?"
 
+kSeparator1 <- "\\s*((,)|( ))\\s*"
+
 kSeparator2 <- "\\s*( of )?\\s*"
 
 kMonthName <- paste(
@@ -34,6 +36,14 @@ kYear <- "((\\d{2})|(\\d{4}))"
 kYear4 <- "(\\d{4})"
 
 kMonthNum <- "((0?[1-9])|(1[0-2]))"
+
+kTimeDigit <- "((\\d)?\\d)"
+
+kAt <- "((at )?(@\\s*)?)"
+
+kAmPm <- "(\\s*((am)|(a\\.m\\.)|(pm)|(p\\.m\\.)))?"
+
+kSeparator6 <- "\\s*((:)|( ))\\s*"
 
 kMonth <- paste(
 c("(", kMonthName, "|", kMonthNum, ")"), collapse="")
@@ -71,7 +81,17 @@ kYMD.alt <- paste(
     kYear,
     kSeparator4,
     kMonth3,
-    kDay), collapse="")
+    kDay
+  ), collapse=""
+)
+
+kH <- paste(
+  c(
+    kAt,
+    kTimeDigit,
+    kAmPm
+  ), collapse=""
+)
 
 kYMD_H.alt <- paste(
   c( kYMD.alt,
@@ -80,11 +100,35 @@ kYMD_H.alt <- paste(
   ), collapse=""
 )
 
+kHM <- paste(
+  c(
+    kAt,
+    kTimeDigit,
+    kSeparator6,
+    kTimeDigit,
+    kAmPm
+  ), collapse=""
+)
+
+
 kYMD_HM.alt <- paste(
   c( kYMD.alt,
      kSeparator1,
      kHM
   ), collapse=""
+)
+
+kHMS <- paste(
+  c(
+    kAt,
+    kTimeDigit,
+    kSeparator6,
+    kTimeDigit,
+    kSeparator6,
+    kTimeDigit,
+    kAmPm
+  ),
+  collapse=""
 )
 
 kYMD_HMS.alt <- paste(
@@ -120,13 +164,7 @@ kYMD <- paste(
         kDay
     ), collapse="")
 
-kTimeDigit <- "((\\d)?\\d)"
 
-kAt <- "((at )?(@\\s*)?)"
-
-kAmPm <- "(\\s*((am)|(a\\.m\\.)|(pm)|(p\\.m\\.)))?"
-
-kSeparator6 <- "\\s*((:)|( ))\\s*"
 
 kH <- paste(
     c(
@@ -136,30 +174,10 @@ kH <- paste(
     ), collapse=""
 )
 
-kHM <- paste(
-    c(
-        kAt,
-        kTimeDigit,
-        kSeparator6,
-        kTimeDigit,
-        kAmPm
-    ), collapse=""
-)
 
-kHMS <- paste(
-    c(
-        kAt,
-        kTimeDigit,
-        kSeparator6,
-        kTimeDigit,
-        kSeparator6,
-        kTimeDigit,
-        kAmPm
-    ),
-    collapse=""
-)
 
-kSeparator1 <- "\\s*((,)|( ))\\s*"
+
+
 
 kDMY_H <- paste(
     c( kDMY,
