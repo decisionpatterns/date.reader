@@ -25,6 +25,6 @@ type.convert <- function(x, ...) {
     return( utils::type.convert(x, ...) )
   }
   
-  return( as.POSIXct.character(x, format=format) )
+  return( string.to.POSIXct(x, format=format) )
 
 }
