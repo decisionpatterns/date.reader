@@ -6,6 +6,6 @@
 #' @name date.reader
 #' @examples 
 #'   # -tk
-#' @docType pacakge
+#' @docType package
 
 NULL

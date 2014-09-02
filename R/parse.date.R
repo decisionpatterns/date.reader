@@ -14,29 +14,35 @@
 #'  .parse.date( "January 11, 2014", "MDY" )
 #'  .parse.date( "2014/02/16", "YMD" )
 #'  .parse.date( "2014-08-05", "YMD" )
+#'  .parse.date( "20140805", "ymd.numeric")
+#'  .parse.date( "14/08/05", "ymd.alt")
 #'    
 #' @note Internal function, a wrapper for lubridate functions
 #' @rdname parse.date 
 
-.parse.date <- function(txt, format) {
-  
+.parse.date <- function(txt, format, tz="UTC", check.regex=TRUE) {
+
   txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
   txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
+  if (check.regex) {
+    regex <- lookup.regex(format)
+    if (is.na(regex)) {
+      return(NA)
+    }
+    if (! grepl(regex, txt, ignore.case=TRUE)) {
+      return(NA)
+    }
+  }
 
+  f <- lookup.lubridate.fun(format)
   suppressWarnings(
-    tryCatch({
-      format <- lookup.format(format)
-      if (is.na(format)) {
-        return(NA)
-      }
-      if (! grepl(format, txt, ignore.case=TRUE)) {
-        return(NA)
-      }
-      f <- lookup.lubridate.fun(format)
-      if (is.na(f)) {
-          return(NA)
-      }
-      return( f(txt) )
-    }))
-  return(NA)
+  if (is.na(f)) {
+      return(NA)
+  })
+
+  suppressWarnings({
+    result <- f(txt, tz=tz)
+    return( result )
+  }
+  )
 }

@@ -66,6 +66,39 @@ kMDY <- paste(
     kSeparator5,
     kYear), collapse="")
 
+kYMD.alt <- paste(
+  c(
+    kYear,
+    kSeparator4,
+    kMonth3,
+    kDay), collapse="")
+
+kYMD_H.alt <- paste(
+  c( kYMD.alt,
+     kSeparator1,
+     kH 
+  ), collapse=""
+)
+
+kYMD_HM.alt <- paste(
+  c( kYMD.alt,
+     kSeparator1,
+     kHM
+  ), collapse=""
+)
+
+kYMD_HMS.alt <- paste(
+  c( kYMD.alt,
+     kSeparator1,
+     kHMS
+  ), collapse=""
+)
+            
+kMonth2 <- paste(
+  c("(", kMonthNum, kSeparator4, ")"
+  ), collapse=""
+)
+
 kMonth4 <- paste(
   c("(", "\\s*", kMonthName, "\\s*", ")"
   ), collapse=""
@@ -192,79 +225,70 @@ kYMD_HMS <- paste(
 )
 
 kYYYYMMDD <- "\\d{8}"
-kYYYYMMDD_HH <- "\\d{10}}"
-kYYYYMMDD_HHMM <- "\\d{12}}"
+kYYYYMMDD_HH <- "\\d{10}"
+kYYYYMMDD_HHMM <- "\\d{12}"
 kYYYYMMDD_HHMMSS <- "\\d{14}"
 
-kFormats <- c(
-    kYYYYMMDD_HHMMSS,
-    kYYYYMMDD_HHMM,
-    kYYYYMMDD_HH,
-    kYYYYMMDD,
-    kDMY_HMS,
-    kDMY_HM,
-    kDMY_H,
-    kDMY,
-    kMDY_HMS,
-    kMDY_HM,
-    kMDY_H,
-    kMDY,
-    kYMD_HMS,
-    kYMD_HM,
-    kYMD_H,
-    kYMD
+kFormats <- list(
+    ymd_hms.numeric=kYYYYMMDD_HHMMSS,
+    ymd_hm.numeric=kYYYYMMDD_HHMM,
+    ymd_h.numeric=kYYYYMMDD_HH,
+    ymd.numeric=kYYYYMMDD,
+    dmy_hms=kDMY_HMS,
+    dmy_hm=kDMY_HM,
+    dmy_h=kDMY_H,
+    dmy=kDMY,
+    mdy_hms=kMDY_HMS,
+    mdy_hm=kMDY_HM,
+    mdy_h=kMDY_H,
+    mdy=kMDY,
+    ymd_hms=kYMD_HMS,
+    ymd_hm=kYMD_HM,
+    ymd_h=kYMD_H,
+    ymd=kYMD,
+    ymd_hms.alt=kYMD_HMS.alt,
+    ymd_hm.alt=kYMD_HM.alt,
+    ymd_h.alt=kYMD_H.alt,
+    ymd.alt=kYMD.alt
 )
 
-kLubridateFormats <- c(
-    ymd_hms,
-    ymd_hm,
-    ymd_h,
-    ymd,
-    dmy_hms,
-    dmy_hm,
-    dmy_h,
-    dmy,
-    mdy_hms,
-    mdy_hm,
-    mdy_h,
-    mdy,
-    ymd_hms,
-    ymd_hm,
-    ymd_h,
-    ymd
+kLubridateFormats <- list(
+  ymd_hms.numeric=lubridate::ymd_hms,
+  ymd_hm.numeric=lubridate::ymd_hm,
+  ymd_h.numeric=lubridate::ymd_h,
+  ymd.numeric=lubridate::ymd,
+  dmy_hms=lubridate::dmy_hms,
+  dmy_hm=lubridate::dmy_hm,
+  dmy_h=lubridate::dmy_h,
+  dmy=lubridate::dmy,
+  mdy_hms=lubridate::mdy_hms,
+  mdy_hm=lubridate::mdy_hm,
+  mdy_h=lubridate::mdy_h,
+  mdy=lubridate::mdy,
+  ymd_hms=lubridate::ymd_hms,
+  ymd_hm=ymd_hm,
+  ymd_h=lubridate::ymd_h,
+  ymd=lubridate::ymd,
+  ymd_hms.alt=lubridate::ymd_hms,
+  ymd_hm.alt=lubridate::ymd_hm,
+  ymd_h.alt=lubridate::ymd_h,
+  ymd.alt=lubridate::ymd
 )
 
-kFormatNames <- c(
-    "YYYYMMDD_HHMMSS",
-    "YYYYMMDD_HHMM",
-    "YYYYMMDD_HH",
-    "YYYYMMDD",
-    "DMY_HMS",
-    "DMY_HM",
-    "DMY_H",
-    "DMY",
-    "MDY_HMS",
-    "MDY_HM",
-    "MDY_H",
-    "MDY",
-    "YMD_HMS",
-    "YMD_HM",
-    "YMD_H",
-    "YMD"
-)
-
-lookup.format <- function(name) {
-    w <- match(name, kFormatNames)
-    if (is.na(w)) {
-        return(NA)
+lookup.regex <- function(name) {
+    name <- tolower(name)
+    retval <- kFormats[[name]]
+    if (is.null(retval)) {
+      return(NA)
     }
-    return(kFormats[[w]])
+    return(retval)
 }
 
 lookup.lubridate.fun <- function(name) {
-    w <- match(name, kFormatNames)
-    if (is.na(w)) {
-        return(NA)
+    name <- tolower(name)
+    retval <- kLubridateFormats[[name]]
+    if (is.null(retval)) {
+      return(NA)
     }
-    return(kLubridateFormats[[w]])
+    return(retval)
 }
