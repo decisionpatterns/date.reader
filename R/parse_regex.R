@@ -115,7 +115,9 @@ kYMD.alt <- paste(
     kYear,
     kSeparator4,
     kMonth3,
-    kDay), collapse="")
+    kDay
+	), collapse=""
+)
 
 kYMD_H.alt <- paste(
   c( kYMD.alt,
@@ -163,9 +165,6 @@ kYMD <- paste(
         kMonth6,
         kDay
     ), collapse="")
-
-
-
 
 kDMY_H <- paste(
     c( kDMY,

@@ -2,7 +2,7 @@
 \name{which.format}
 \alias{.which.format}
 \alias{which.format}
-\title{which.format}
+\title{Utilities for detecting the format of date strings}
 \usage{
 which.format(x, nTrials = 1, nErrors = 0)
 
@@ -27,6 +27,8 @@ character, name for the date format
 character representing the name of the date format
 }
 \description{
+Utilities for detecting the format of date strings
+
 which.format
 
 .which.format

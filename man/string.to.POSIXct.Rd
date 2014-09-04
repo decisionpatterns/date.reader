@@ -13,8 +13,6 @@ this parameter is NA, then the function will try to guess the format
 for each value}
 
 \item{tz}{character; optional time zone}
-
-\item{...;}{other optional arguments to pass along}
 }
 \value{
 POSIXct vector (or NA, if a value cannot be parsed)

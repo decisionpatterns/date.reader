@@ -9,7 +9,6 @@
 #' for each value
 #' @param tz character; optional time zone
 #' 
-#' @param ...; other optional arguments to pass along
 #'
 #' @return 
 #'   POSIXct vector (or NA, if a value cannot be parsed)
@@ -32,7 +31,6 @@
 #'  string.to.POSIXct( dts, format='ymd' )
 #'    
 #' @export
-#' 
 
 string.to.POSIXct <- function( x, format=NA, tz="UTC" ) {
   

@@ -1,3 +1,11 @@
+#' Utilities for detecting the format of date strings
+#' 
+#' @name which.format
+NULL
+
+source("parse_regex.R")
+source("parse.date.R")
+
 #' which.format
 #' 
 #' @param x character; values to convert to a POSIX date
@@ -22,7 +30,7 @@
 #'  which.format(x, nTrials=3, nErrors=1)
 #'    
 #' @note Internal function
-#' @export
+#' @rdname which.format
   
 which.format <- function(x, nTrials=1, nErrors=0) {
   
@@ -71,7 +79,6 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'    
 #' @note Internal function that is not exported
 #' @rdname which.format
-#' @export
    
 .which.format <- function(txt) {
   for (fmt in all.regex.names()) {

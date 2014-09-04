@@ -17,4 +17,4 @@ w1 <- ymd(dts.1)
 w2 <- mdy(dts.2)
 w3 <- mdy_hm(dts.3)
 w4 <- ymd(dts.4)
-
+print("done with test-as.POSIX.R")

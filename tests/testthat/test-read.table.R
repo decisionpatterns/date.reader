@@ -18,3 +18,4 @@ dates <- table.new[[2]]
 expect_equivalent(dates[[1]], mdy("01/12/1954"))
 expect_equivalent(dates[[2]], mdy("02/01/1990"))
 expect_equivalent(dates[[3]], mdy("03/31/1980"))
+print("done with test-read.table.R")
