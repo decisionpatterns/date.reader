@@ -20,7 +20,10 @@
 #' @note Internal function, a wrapper for lubridate functions
 #' @rdname parse.date
 
-.parse.date <- function(txt, format, tz="UTC", check.regex=TRUE) {
+.parse.date <- function(txt, format, tz=NULL, check.regex=TRUE) {
+  if (is.null(tz)) {
+    tz <- getOption("date.reader.tz", default="UTC")
+  }
 
   txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
   txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )

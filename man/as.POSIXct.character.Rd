@@ -3,14 +3,12 @@
 \alias{as.POSIXct.character}
 \title{as.POSIXct.character}
 \usage{
-\method{as.POSIXct}{character}(x, tz = "UTC")
+\method{as.POSIXct}{character}(x, tz = NULL)
 }
 \arguments{
 \item{x}{character; vector to convert to a POSIX date}
 
 \item{tz}{character; optional time zone}
-
-\item{...;}{other optional arguments to pass along}
 }
 \value{
 POSIXct vector (or NA, if a value cannot be parsed)

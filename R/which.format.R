@@ -3,9 +3,6 @@
 #' @name which.format
 NULL
 
-source("parse_regex.R")
-source("parse.date.R")
-
 #' which.format
 #' 
 #' @param x character; values to convert to a POSIX date
@@ -27,7 +24,7 @@ source("parse.date.R")
 #' @examples 
 #'   # -tk
 #'  x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
-#'  which.format(x, nTrials=3, nErrors=1)
+#'  date.reader:::which.format(x, nTrials=3, nErrors=1)
 #'    
 #' @note Internal function
 #' @rdname which.format
@@ -52,7 +49,7 @@ which.format <- function(x, nTrials=1, nErrors=0) {
     return(NA)
   }
   
-  if (grepl("YYYY", format)) {
+  if (grepl(".numeric", format)) {
     if (nTrials.actual < nTrials) {
       return(NA)
     }
@@ -74,8 +71,8 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  .which.format("January 11, 2014")
-#'  .which.format("2014/02/16")
+#'  date.reader:::.which.format("January 11, 2014")
+#'  date.reader:::.which.format("2014/02/16")
 #'    
 #' @note Internal function that is not exported
 #' @rdname which.format

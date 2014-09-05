@@ -3,9 +3,9 @@
 #' @name date.regex
 NULL
 
-kTrials <- 10
-kErrors <- 5
-kSuccesses <- 5
+#kTrials <- 10
+#kErrors <- 5
+#kSuccesses <- 5
 
 kMonthWords <- c(
     "january", "jan", "february", "feb",

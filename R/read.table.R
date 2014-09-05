@@ -11,7 +11,11 @@
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples
-#'   # -tk
+#' # -tk
+#' name <- c("bob", "fred", "sally")
+#' birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
+#' birthday <- as.factor(birthday)
+#' table <- data.table(name,birthday)
 #'      
 #' @export
 
@@ -78,7 +82,9 @@ read.table <- function(file, ...) {
     }
 
     x <- dat[, col.idx]
-    fmt <- which.format(x)
+    nErrors <- getOption("date.reader.nErrors", 5)
+    nTrials <- getOption("date.reader.nTrials", 10)
+    fmt <- which.format(x, nErrors=nErrors, nTrials=nTrials)
     if (!is.na(fmt)) {
       x <- string.to.POSIXct(x, format=fmt)
       dat[, col.idx] <- x

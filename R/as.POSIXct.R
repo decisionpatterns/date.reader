@@ -32,8 +32,10 @@
 #'    
 #' @export
 
-string.to.POSIXct <- function( x, format=NA, tz="UTC" ) {
-  
+string.to.POSIXct <- function( x, format=NA, tz=NULL ) {
+  if (is.null(tz)) {
+    tz <- getOption("date.reader.tz", default="UTC")
+  }
   if (is.na(format)) {
     check.regex <- TRUE
   } else {
@@ -63,7 +65,6 @@ string.to.POSIXct <- function( x, format=NA, tz="UTC" ) {
 #' 
 #' @param x character; vector to convert to a POSIX date
 #' @param tz character; optional time zone
-#' @param ...; other optional arguments to pass along
 #' 
 #'
 #' @return 
@@ -87,7 +88,7 @@ string.to.POSIXct <- function( x, format=NA, tz="UTC" ) {
 #' @export
 #' 
 
-as.POSIXct.character <- function( x, tz="UTC") {
+as.POSIXct.character <- function( x, tz=NULL ) {
   fmt <- which.format(x)
   if (is.na(fmt)) {
     return(NA)

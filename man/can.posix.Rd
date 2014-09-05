@@ -3,7 +3,7 @@
 \alias{can.posix}
 \title{can.posix}
 \usage{
-can.posix(x, nTrials = kTrials, nErrors = kErrors)
+can.posix(x, nTrials = 1, nErrors = 0)
 }
 \arguments{
 \item{x}{character; values to parse}
@@ -26,6 +26,8 @@ can.posix
 }
 \examples{
 # -tk
+  can.posix("12-11-10")
+  can.posix("13-13-13")
 }
 \seealso{
 \code{\link{which.format}}

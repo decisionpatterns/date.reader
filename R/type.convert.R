@@ -19,8 +19,8 @@
 
 type.convert <- function(x, ...) {
   
-  format <- which.format(x, nTrials=kTrials, nErrors=kErrors)
-  
+  format <- which.format(x)
+
   if ( is.na(format) ) {
     return( utils::type.convert(x, ...) )
   }

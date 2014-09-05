@@ -19,6 +19,10 @@ read.table
 }
 \examples{
 # -tk
+name <- c("bob", "fred", "sally")
+birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
+birthday <- as.factor(birthday)
+table <- data.table(name,birthday)
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

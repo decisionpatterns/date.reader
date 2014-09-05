@@ -3,7 +3,7 @@
 \alias{string.to.POSIXct}
 \title{string.to.POSIXct}
 \usage{
-string.to.POSIXct(x, format = NA, tz = "UTC")
+string.to.POSIXct(x, format = NA, tz = NULL)
 }
 \arguments{
 \item{x}{character; vector to convert to a POSIX date}

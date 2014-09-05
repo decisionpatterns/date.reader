@@ -20,11 +20,12 @@
 #'   
 #' @examples 
 #'   # -tk
+#'   can.posix("12-11-10")
+#'   can.posix("13-13-13")
 #'      
 #' @export
 
-can.posix <- function(x, nTrials=kTrials, nErrors=kErrors) {
-  
+can.posix <- function(x, nTrials=1, nErrors=0) {
   format <- which.format(x, nTrials=nTrials, nErrors=nErrors)
   return (! is.na(format))
   

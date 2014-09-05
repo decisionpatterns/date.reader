@@ -3,7 +3,7 @@
 \alias{.parse.date}
 \title{.parse.date}
 \usage{
-.parse.date(txt, format, tz = "UTC", check.regex = TRUE)
+.parse.date(txt, format, tz = NULL, check.regex = TRUE)
 }
 \arguments{
 \item{txt}{character; value to convert to a POSIX date}
