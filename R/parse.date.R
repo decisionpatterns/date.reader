@@ -21,6 +21,7 @@
 #'  date.reader:::.parse.date( "14/08/05", "ymd.alt")
 #'    
 #' @note Internal function, a wrapper for lubridate functions
+#' @include apply.lubridate.fun.R 
 #' @rdname parse.date
 
 .parse.date <- function(txt, format, tz=NULL, check.regex=TRUE) {
@@ -30,6 +31,7 @@
 
   txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
   txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
+  
   if (check.regex) {
     regex <- lookup.regex(format)
     if (is.na(regex)) {
@@ -41,4 +43,5 @@
   }
 
   return(apply.lubridate.fun(format, txt, tz))
+  
 }

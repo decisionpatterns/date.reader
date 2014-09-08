@@ -2,7 +2,6 @@
 
 S3method(as.POSIXct,character)
 export(can.posix)
-export(lookup.regex)
 export(read.table)
-export(string.to.POSIXct)
 export(type.convert)
+export(which.format)

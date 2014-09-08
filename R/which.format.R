@@ -22,12 +22,10 @@ NULL
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'   # -tk
 #'  x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
-#'  date.reader:::which.format(x, nTrials=3, nErrors=1)
+#'  which.format(x, nTrials=3, nErrors=1)
 #'    
-#' @note Internal function
-#' @rdname which.format
+#' @export
   
 which.format <- function(x, nTrials=1, nErrors=0) {
   
@@ -71,8 +69,11 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  date.reader:::.which.format("January 11, 2014")
-#'  date.reader:::.which.format("2014/02/16")
+#' 
+#'  \dontrun{
+#'    date.reader:::.which.format("January 11, 2014")
+#'    date.reader:::.which.format("2014/02/16")
+#'  }
 #'    
 #' @note Internal function that is not exported
 #' @rdname which.format

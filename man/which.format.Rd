@@ -34,16 +34,15 @@ which.format
 .which.format
 }
 \note{
-Internal function
-
 Internal function that is not exported
 }
 \examples{
-# -tk
- x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
- date.reader:::which.format(x, nTrials=3, nErrors=1)
-date.reader:::.which.format("January 11, 2014")
- date.reader:::.which.format("2014/02/16")
+x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
+ which.format(x, nTrials=3, nErrors=1)
+\dontrun{
+   date.reader:::.which.format("January 11, 2014")
+   date.reader:::.which.format("2014/02/16")
+ }
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

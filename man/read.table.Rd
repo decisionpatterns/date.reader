@@ -20,15 +20,16 @@ value into POSIXct objects.  Otherwise, it acts as utils::read.table
 read.table
 }
 \examples{
-# -tk
 name <- c("bob", "fred", "sally")
-birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
-birthday <- as.factor(birthday)
-table <- data.frame(name,birthday)
-conn <- textConnection("read.table.txt", 'w')
-write.table(table, file=conn, quote=FALSE, sep="\\t", row.names=FALSE)
-conn <- textConnection(read.table.txt)
-table.new <- read.table(conn, header=TRUE, sep="\\t")
+  birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
+  birthday <- as.factor(birthday)
+  table <- data.frame(name,birthday)
+
+  conn <- textConnection("read.table.txt", 'w')
+  write.table(table, file=conn, quote=FALSE, sep="\\t", row.names=FALSE)
+
+  conn <- textConnection(read.table.txt)
+  table.new <- read.table(conn, header=TRUE, sep="\\t")
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

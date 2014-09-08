@@ -12,15 +12,17 @@
 #'   \code{\link[base]{as.POSIXct}}
 #' 
 #' @examples 
-#'   x <- type.convert( c("2014-08-05" ) )
+#'   x <- type.convert( "2014-08-05" )
+#'   x <- type.convert( c("2014-08-05", "2014-08-12") )   
 #'   x
+#'   
 #'   class(x)  # "POSIXct" "POSIXt" 
 #'   
 #' @export
 
 type.convert <- function(x, ...) {
   
-  format <- which.format(x)
+  format <- which.format(x, ...)
 
   if ( is.na(format) ) {
     return( utils::type.convert(x, ...) )

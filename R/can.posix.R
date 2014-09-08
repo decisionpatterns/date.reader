@@ -19,14 +19,16 @@
 #'   \code{\link{which.format}}
 #'   
 #' @examples 
-#'   # -tk
 #'   can.posix("12-11-10")
 #'   can.posix("13-13-13")
 #'      
+#' @include which.format.R
+#'         
 #' @export
 
-can.posix <- function(x, nTrials=1, nErrors=0) {
+can.posix <- function( x, nTrials=min(length(x),100), nErrors= 0) {
   format <- which.format(x, nTrials=nTrials, nErrors=nErrors)
+
   return (! is.na(format))
   
 }

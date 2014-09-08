@@ -12,13 +12,10 @@ lookup.regex(name)
 the regex with that name
 }
 \description{
-lookup.regex
-}
-\note{
-Internal function that is not exported
+find a regexp by name
 }
 \examples{
-lookup.regex("mdy")
+date.reader:::lookup.regex("mdy")
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

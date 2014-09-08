@@ -21,17 +21,18 @@ POSIXct vector (or NA, if a value cannot be parsed)
 Convers character to POSIXct
 }
 \examples{
-# -tk
- dts <- c( '20140210', '19791118', '19720329' )
- string.to.POSIXct( dts )
+\dontrun{
+  dts <- c( '20140210', '19791118', '19720329' )
+  string.to.POSIXct( dts )
 
- dts <- rep( '20140210', 10 )
- string.to.POSIXct( dts )
+  dts <- rep( '20140210', 10 )
+  string.to.POSIXct( dts )
 
- dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
- string.to.POSIXct( dts )
+  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
+  string.to.POSIXct( dts )
 
- string.to.POSIXct( dts, format='ymd' )
+  string.to.POSIXct( dts, format='ymd' )
+}
 }
 \seealso{
 \code{\link[base]{as.POSIXct}} \cr

@@ -19,8 +19,10 @@ from utils::type.convert
 type.convert
 }
 \examples{
-x <- type.convert( c("2014-08-05" ) )
+x <- type.convert( "2014-08-05" )
+  x <- type.convert( c("2014-08-05", "2014-08-12") )
   x
+
   class(x)  # "POSIXct" "POSIXt"
 }
 \seealso{

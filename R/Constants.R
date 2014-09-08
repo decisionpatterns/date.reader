@@ -3,49 +3,70 @@
 #' @name date.regex
 NULL
 
-#kTrials <- 10
-#kErrors <- 5
-#kSuccesses <- 5
 
+#' @rdname Constants
+all.regex.names <- function() {
+  return( names(kFormats) )
+}
+
+
+
+
+#' @rdname Constants
 kMonthWords <- c(
     "january", "jan", "february", "feb",
     "march", "mar", "april", "april", "may", "june", "jun",
     "july", "jul", "august", "aug", "september", "sep",
     "october", "oct", "november", "nov", "december", "dec")
 
+#' @rdname Constants
 kDayWords <- c(
     "sunday", "sun", "su", "monday", "mon", "mo", "tuesday", 
     "tue", "tu", "wednesday", "wed", "we", "thursday", "thu", "th",
     "friday", "fri", "fr", "saturday", "sat", "sa")
 
+#' @rdname Constants
 kOptionalDayName <- paste(
     c("(((", paste(kDayWords, collapse=")|("), "))\\s*(,)?\\s+)?"), collapse="")
 
+#' @rdname Constants
 kDay <- "(the\\s+)?[0-3]?\\d((rd)|(th)|(st))?"
 
+#' @rdname Constants
 kSeparator1 <- "\\s*((,)|( ))\\s*"
 
+#' @rdname Constants
 kSeparator2 <- "\\s*( of )?\\s*"
 
+#' @rdname Constants
 kMonthName <- paste(
     c("((", paste(kMonthWords, collapse=")|("), "))"), collapse="")
 
+#' @rdname Constants
 kSeparator3 <- "\\s*(,)?\\s*"
 
+#' @rdname Constants
 kSeparator4 <- "\\s*(( )|(-)|(/))\\s*"
 
+#' @rdname Constants
 kYear <- "((\\d{2})|(\\d{4}))"
 
+#' @rdname Constants
 kYear4 <- "(\\d{4})"
 
+#' @rdname Constants
 kTimeDigit <- "((\\d)?\\d)"
 
+#' @rdname Constants
 kAt <- "((at )?(@\\s*)?)"
 
+#' @rdname Constants
 kAmPm <- "(\\s*((am)|(a\\.m\\.)|(pm)|(p\\.m\\.)))?"
 
+#' @rdname Constants
 kSeparator6 <- "\\s*((:)|( ))\\s*"
 
+#' @rdname Constants
 kH <- paste(
   c(
     kAt,
@@ -54,6 +75,7 @@ kH <- paste(
   ), collapse=""
 )
 
+#' @rdname Constants
 kHM <- paste(
   c(
     kAt,
@@ -64,6 +86,7 @@ kHM <- paste(
   ), collapse=""
 )
 
+#' @rdname Constants
 kHMS <- paste(
   c(
     kAt,
@@ -77,31 +100,40 @@ kHMS <- paste(
   collapse=""
 )
 
+#' @rdname Constants
 kMonthNum <- "((0?[1-9])|(1[0-2]))"
 
+#' @rdname Constants
 kMonth <- paste(
-c("(", kMonthName, "|", kMonthNum, ")"), collapse="")
+  c( "(", kMonthName, "|", kMonthNum, ")"), collapse=""
+)
 
+#' @rdname Constants
 kMonth1 <- paste(
   c("(", kMonthName, "\\s*", ")"
   ), collapse=""
 )
 
+#' @rdname Constants
 kMonth2 <- paste(
   c("(", kMonthNum, kSeparator4, ")"
   ), collapse=""
 )
 
+#' @rdname Constants
 kMonth3 <- paste(
   c("(", kMonth1, "|", kMonth2, ")"), collapse=""
 )
 
+#' @rdname Constants
 kDMY <- paste(
     c(kOptionalDayName, kDay, kSeparator2, kMonthName, 
         kSeparator3, kYear), collapse="")
 
+#' @rdname Constants
 kSeparator5 <- "\\s*((,)|( )|(-)|(/))\\s*"
 
+#' @rdname Constants
 kMDY <- paste(
     c(
     kOptionalDayName, 
@@ -110,6 +142,7 @@ kMDY <- paste(
     kSeparator5,
     kYear), collapse="")
 
+#' @rdname Constants
 kYMD.alt <- paste(
   c(
     kYear,
@@ -119,6 +152,7 @@ kYMD.alt <- paste(
 	), collapse=""
 )
 
+#' @rdname Constants
 kYMD_H.alt <- paste(
   c( kYMD.alt,
      kSeparator1,
@@ -126,6 +160,7 @@ kYMD_H.alt <- paste(
   ), collapse=""
 )
 
+#' @rdname Constants
 kYMD_HM.alt <- paste(
   c( kYMD.alt,
      kSeparator1,
@@ -133,6 +168,7 @@ kYMD_HM.alt <- paste(
   ), collapse=""
 )
 
+#' @rdname Constants
 kYMD_HMS.alt <- paste(
   c( kYMD.alt,
      kSeparator1,
@@ -140,25 +176,30 @@ kYMD_HMS.alt <- paste(
   ), collapse=""
 )
             
+#' @rdname Constants
 kMonth2 <- paste(
   c("(", kMonthNum, kSeparator4, ")"
   ), collapse=""
 )
 
+#' @rdname Constants
 kMonth4 <- paste(
   c("(", "\\s*", kMonthName, "\\s*", ")"
   ), collapse=""
 )
 
+#' @rdname Constants
 kMonth5 <- paste(
   c("(", kSeparator5, kMonthNum, kSeparator5, ")"
   ), collapse=""
 )
 
+#' @rdname Constants
 kMonth6 <- paste(
   c("(", kMonth4, "|", kMonth5, ")"), collapse=""
 )
 
+#' @rdname Constants
 kYMD <- paste(
     c(
         kYear4,
@@ -166,6 +207,7 @@ kYMD <- paste(
         kDay
     ), collapse="")
 
+#' @rdname Constants
 kDMY_H <- paste(
     c( kDMY,
         kSeparator1,
@@ -173,6 +215,7 @@ kDMY_H <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kDMY_HM <- paste(
     c( kDMY,
         kSeparator1,
@@ -180,6 +223,7 @@ kDMY_HM <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kDMY_HMS <- paste(
     c( kDMY,
         kSeparator1,
@@ -187,6 +231,7 @@ kDMY_HMS <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kMDY_H <- paste(
     c( kMDY,
         kSeparator1,
@@ -194,6 +239,7 @@ kMDY_H <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kMDY_HM <- paste(
     c( kMDY,
         kSeparator1,
@@ -201,6 +247,7 @@ kMDY_HM <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kMDY_HMS <- paste(
     c( kMDY,
         kSeparator1,
@@ -208,6 +255,7 @@ kMDY_HMS <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kYMD_H <- paste(
     c( kYMD,
         kSeparator1,
@@ -215,6 +263,7 @@ kYMD_H <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kYMD_HM <- paste(
     c( kYMD,
         kSeparator1,
@@ -222,6 +271,7 @@ kYMD_HM <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kYMD_HMS <- paste(
     c( kYMD,
         kSeparator1,
@@ -229,11 +279,19 @@ kYMD_HMS <- paste(
     ), collapse=""
 )
 
+#' @rdname Constants
 kYYYYMMDD <- "\\d{8}"
+
+#' @rdname Constants
 kYYYYMMDD_HH <- "\\d{10}"
+
+#' @rdname Constants
 kYYYYMMDD_HHMM <- "\\d{12}"
+
+#' @rdname Constants
 kYYYYMMDD_HHMMSS <- "\\d{14}"
 
+#' @rdname Constants
 kFormats <- list(
     ymd_hms.numeric=kYYYYMMDD_HHMMSS,
     ymd_hm.numeric=kYYYYMMDD_HHMM,
@@ -257,75 +315,5 @@ kFormats <- list(
     ymd.alt=kYMD.alt
 )
 
-all.regex.names <- function() {
-  return(names(kFormats))
-}
 
-#' lookup.regex
-#' 
-#' @param name character; the name given to the regex
-#'
-#' @return 
-#' the regex with that name
-#'
-#' @seealso 
-#'   \code{\link[base]{as.POSIXct}}
-#'   
-#' @examples 
-#'  lookup.regex("mdy")
-#'    
-#' @note Internal function that is not exported
-#' @export
 
-lookup.regex <- function(name) {
-    name <- tolower(name)
-    retval <- kFormats[[name]]
-    if (is.null(retval)) {
-      return(NA)
-    }
-    return(retval)
-}
-
-#' apply.lubridate.fun
-#' 
-#' @param format character; the name of the date format (case insensitive)
-#' @param txt character; the text to convert to a date
-#' @param tz character; the time zone
-#'
-#' @return 
-#' A POSIXct object, or NA
-#'
-#' @seealso 
-#'   \code{\link[base]{as.POSIXct}}
-#'   
-#' @examples 
-#'  date.reader:::apply.lubridate.fun("mdy", "01/23/2017", "UTC")
-#'    
-#' @note Internal function that is not exported
-#' @rdname date.regex
-
-apply.lubridate.fun <- function(format, txt, tz) {
-  retval <- suppressWarnings(
-    switch(format,
-           ymd_hms.numeric=lubridate::ymd_hms(txt, tz=tz),
-           ymd_hm.numeric=lubridate::ymd_hm(txt, tz=tz),
-           ymd_h.numeric=lubridate::ymd_h(txt, tz=tz),
-           ymd.numeric=lubridate::ymd(txt, tz=tz),
-           dmy_hms=lubridate::dmy_hms(txt, tz=tz),
-           dmy_hm=lubridate::dmy_hm(txt, tz=tz),
-           dmy_h=lubridate::dmy_h(txt, tz=tz),
-           dmy=lubridate::dmy(txt, tz=tz),
-           mdy_hms=lubridate::mdy_hms(txt, tz=tz),
-           mdy_hm=lubridate::mdy_hm(txt, tz=tz),
-           mdy_h=lubridate::mdy_h(txt, tz=tz),
-           mdy=lubridate::mdy(txt, tz=tz),
-           ymd_hms=lubridate::ymd_hms(txt, tz=tz),
-           ymd_hm=lubridate::ymd_hm(txt, tz=tz),
-           ymd_h=lubridate::ymd_h(txt, tz=tz),
-           ymd=lubridate::ymd(txt, tz=tz),
-           ymd_hms.alt=lubridate::ymd_hms(txt, tz=tz),
-           ymd_hm.alt=lubridate::ymd_hm(txt, tz=tz),
-           ymd_h.alt=lubridate::ymd_h(txt, tz=tz),
-           ymd.alt=lubridate::ymd(txt, tz=tz)))
-  return(retval)
-}
