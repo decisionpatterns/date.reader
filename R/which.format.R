@@ -19,7 +19,7 @@ NULL
 #'   character, name for the date format
 #'
 #' @seealso 
-#'   \code{\link[base]{as.POSIX}}
+#'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
 #'   # -tk

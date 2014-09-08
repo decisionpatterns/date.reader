@@ -1,6 +1,7 @@
 #' read.table
 #' 
-#' @param ... additional arguments passed to \code{utils::read.table} 
+#' @param ... additional arguments passed to \code{utils::read.table}
+#' @param file the file or connection to read the table from
 #'
 #' @return data frame. 
 #' 
@@ -15,7 +16,11 @@
 #' name <- c("bob", "fred", "sally")
 #' birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
 #' birthday <- as.factor(birthday)
-#' table <- data.table(name,birthday)
+#' table <- data.frame(name,birthday)
+#' conn <- textConnection("read.table.txt", 'w')
+#' write.table(table, file=conn, quote=FALSE, sep="\t", row.names=FALSE)
+#' conn <- textConnection(read.table.txt)
+#' table.new <- read.table(conn, header=TRUE, sep="\t")
 #'      
 #' @export
 

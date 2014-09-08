@@ -46,7 +46,7 @@ date.reader:::.which.format("January 11, 2014")
  date.reader:::.which.format("2014/02/16")
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
+\code{\link[base]{as.POSIXct}}
 
 \code{\link[base]{as.POSIXct}}
 }

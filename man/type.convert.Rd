@@ -7,6 +7,8 @@ type.convert(x, ...)
 }
 \arguments{
 \item{x}{character;}
+
+\item{...}{list; extra arguments (from utils::type.convert, not used)}
 }
 \value{
 a vector of parsed values. If values
@@ -22,6 +24,6 @@ x <- type.convert( c("2014-08-05" ) )
   class(x)  # "POSIXct" "POSIXt"
 }
 \seealso{
-\code{\link[base]{as.POSIX}}
+\code{\link[base]{as.POSIXct}}
 }
 

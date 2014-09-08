@@ -2,6 +2,9 @@
 #' 
 #' @param txt character; value to convert to a POSIX date
 #' @param format character; name of the format, e.g. "MDY"
+#' @param tz character; optional time zone
+#' @param check.regex Logical; if TRUE, check syntax of 
+#' txt before calling lubridate function.
 #'
 #' @return 
 #' POSIXct object representing a date (or date-time), or NA
@@ -37,15 +40,5 @@
     }
   }
 
-  f <- lookup.lubridate.fun(format)
-  suppressWarnings(
-  if (is.na(f)) {
-      return(NA)
-  })
-
-  suppressWarnings({
-    result <- f(txt, tz=tz)
-    return( result )
-  }
-  )
+  return(apply.lubridate.fun(format, txt, tz))
 }

@@ -65,6 +65,7 @@ string.to.POSIXct <- function( x, format=NA, tz=NULL ) {
 #' 
 #' @param x character; vector to convert to a POSIX date
 #' @param tz character; optional time zone
+#' @param ... list; other optional arguments (from as.POSIXct, ignored)
 #' 
 #'
 #' @return 
@@ -88,7 +89,7 @@ string.to.POSIXct <- function( x, format=NA, tz=NULL ) {
 #' @export
 #' 
 
-as.POSIXct.character <- function( x, tz=NULL ) {
+as.POSIXct.character <- function( x, tz="UTC", ...) {
   fmt <- which.format(x)
   if (is.na(fmt)) {
     return(NA)

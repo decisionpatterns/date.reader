@@ -9,6 +9,11 @@
 \item{txt}{character; value to convert to a POSIX date}
 
 \item{format}{character; name of the format, e.g. "MDY"}
+
+\item{tz}{character; optional time zone}
+
+\item{check.regex}{Logical; if TRUE, check syntax of
+txt before calling lubridate function.}
 }
 \value{
 POSIXct object representing a date (or date-time), or NA
