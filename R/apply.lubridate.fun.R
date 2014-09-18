@@ -43,5 +43,6 @@ apply.lubridate.fun <- function(format, txt, tz) {
            ymd_hm.alt = lubridate::ymd_hm(txt, tz=tz),
            ymd_h.alt = lubridate::ymd_h(txt, tz=tz),
            ymd.alt = lubridate::ymd(txt, tz=tz)))
+  
   return(retval)
 }

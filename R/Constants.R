@@ -1,16 +1,16 @@
-#' Utilities for dealing with date regular expressions
+#' Constants used internally to date.reader packaged
+#' 
+#' These are the constants used internally by the \code{date.reader} package. 
+#' They are not exported.
 #' 
 #' @name date.regex
-NULL
+#' @rdname Constants
 
 
 #' @rdname Constants
 all.regex.names <- function() {
   return( names(kFormats) )
 }
-
-
-
 
 #' @rdname Constants
 kMonthWords <- c(
