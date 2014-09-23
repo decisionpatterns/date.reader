@@ -19,6 +19,7 @@ Collate:
     'which.format.R'
     'parse.date.R'
     'as.POSIXct.R'
+    ''
     'can.posix.R'
     'date.reader-package.R'
     'lookup.regex.R'
