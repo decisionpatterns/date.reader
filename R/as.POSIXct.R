@@ -25,7 +25,7 @@
 #'  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
 #'  as.POSIXct( dts )
 #'
-#' @include which.format
+# @include which.format.R   
 #' @method as.POSIXct character
 #' @export
 
