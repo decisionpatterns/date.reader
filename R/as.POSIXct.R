@@ -6,6 +6,9 @@
 #' @param tz character; optional time zone
 #' @param ... list; other optional arguments (from as.POSIXct, ignored)
 #' 
+#' @note 
+#'   The default timezone matches UTC like \code{lubridate} and not 
+#'   the default of \code{\link[base]{as.POSIXct}} from the base package.
 #'
 #' @return 
 #'   POSIXct vector (or NA, if a value cannot be parsed)
@@ -30,7 +33,7 @@
 #' @export
 
 
-as.POSIXct.character <- function( x, tz="", ...) {
+as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
   fmt <- which.format(x)
   if (is.na(fmt)) {
     return(NA)

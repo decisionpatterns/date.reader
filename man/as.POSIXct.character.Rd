@@ -3,7 +3,7 @@
 \alias{as.POSIXct.character}
 \title{as.POSIXct.character}
 \usage{
-\method{as.POSIXct}{character}(x, tz = "", ...)
+\method{as.POSIXct}{character}(x, tz = getOption("date.reader")$tz, ...)
 }
 \arguments{
 \item{x}{character; vector to convert to a POSIX date}
@@ -17,6 +17,10 @@ POSIXct vector (or NA, if a value cannot be parsed)
 }
 \description{
 Convers character to POSIXct
+}
+\note{
+The default timezone matches UTC like \code{lubridate} and not
+  the default of \code{\link[base]{as.POSIXct}} from the base package.
 }
 \examples{
 # -tk
