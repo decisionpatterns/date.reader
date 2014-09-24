@@ -14,13 +14,16 @@
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  date.reader:::.parse.date( "January 11, 2014", "MDY" )
-#'  date.reader:::.parse.date( "2014/02/16", "YMD" )
-#'  date.reader:::.parse.date( "2014-08-05", "YMD" )
-#'  date.reader:::.parse.date( "20140805", "ymd.numeric")
-#'  date.reader:::.parse.date( "14/08/05", "ymd.alt")
-#'    
+#'   \dontrun{
+#'    .parse.date( "January 11, 2014", "MDY" )
+#'    .parse.date( "2014/02/16", "YMD" )
+#'    .parse.date( "2014-08-05", "YMD" )
+#'    .parse.date( "20140805", "ymd.numeric")
+#'    .parse.date( "14/08/05", "ymd.alt")
+#'   }
+#'     
 #' @note Internal function, a wrapper for lubridate functions
+#'  
 #' @include apply.lubridate.fun.R 
 #' @rdname parse.date
 
@@ -42,6 +45,6 @@
     }
   }
 
-  return(apply.lubridate.fun(format, txt, tz))
+  return( apply.lubridate.fun(format, txt, tz) )
   
 }
