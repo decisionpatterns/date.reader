@@ -75,21 +75,15 @@ as.POSIXct.character <- function( x, tz="UTC", ...) {
 #' @rdname as.POSIXct.R
 #' @include which.format.R parse.date.R
 
-string.to.POSIXct <- function( x, format=NA, tz=NULL ) {
-  if (is.null(tz)) {
-    tz <- getOption("date.reader.tz", default="UTC")
-  }
-  if (is.na(format)) {
-    check.regex <- TRUE
-  } else {
-    check.regex <- FALSE
-  }
-  
+string.to.POSIXct <- function( x, format, tz=getOption("date.reader")$tz ) {
+ 
+  check.regex <- if ( is.null(format) ) TRUE else FALSE 
+
   f <- function(txt) {
-    if ( is.na(format) ) {
+    if ( is.null(format) ) {
       format <- which.format(txt)
     }
-    if ( is.na(format) ) {
+    if ( is.null(format) ) {
       return(NA)
     }
     ret <- .parse.date(txt, format, tz=tz, check.regex=check.regex)

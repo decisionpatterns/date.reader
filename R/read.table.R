@@ -88,8 +88,8 @@ read.table <- function(file, ...) {
     }
 
     x <- dat[, col.idx]
-    nErrors <- getOption("date.reader.nErrors", 5)
-    nTrials <- getOption("date.reader.nTrials", 10)
+    nErrors <- getOption("date.reader")$nErrors 
+    nTrials <- getOption("date.reader")$nTrials
     
     fmt <- which.format(x, nErrors=nErrors, nTrials=nTrials)
     
