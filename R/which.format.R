@@ -22,8 +22,8 @@ NULL
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'  x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
-#'  which.format(x, nTrials=3, nErrors=1)
+#'   x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
+#'   which.format(x, nTrials=3, nErrors=1)
 #'    
 #' @export
   
@@ -71,8 +71,8 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #' @examples 
 #' 
 #'  \dontrun{
-#'    date.reader:::.which.format("January 11, 2014")
-#'    date.reader:::.which.format("2014/02/16")
+#'    .which.format("January 11, 2014")
+#'    .which.format("2014/02/16")
 #'  }
 #'    
 #' @note Internal function that is not exported

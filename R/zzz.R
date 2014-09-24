@@ -8,8 +8,12 @@
     domain = NA
   )
   
-  options( date.reader.tz="UTC" )    
-  options( date.reader.nErrors=5 )   # ???
-  options( date.reader.nTrials=10 )  # ??? 
-
+  opts <- list( 
+      tz = "UTC"
+    , nErrors = 5     # ????
+    , nTrials = 10    # ????
+  )
+  
+  options( date.reader = opts )
+  
 }

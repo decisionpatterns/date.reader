@@ -3,7 +3,8 @@
 \alias{.parse.date}
 \title{.parse.date}
 \usage{
-.parse.date(txt, format, tz = NULL, check.regex = TRUE)
+.parse.date(txt, format, tz = getOption("date.reader")$tz,
+  check.regex = TRUE)
 }
 \arguments{
 \item{txt}{character; value to convert to a POSIX date}
@@ -12,11 +13,11 @@
 
 \item{tz}{character; optional time zone}
 
-\item{check.regex}{Logical; if TRUE, check syntax of
-txt before calling lubridate function.}
+\item{check.regex}{Logical; if TRUE, check syntax of \code{txt} before
+  calling lubridate function.}
 }
 \value{
-POSIXct object representing a date (or date-time), or NA
+POSIXct object representing a date (or datetime), or NA
 if the input cannot be parsed.
 }
 \description{

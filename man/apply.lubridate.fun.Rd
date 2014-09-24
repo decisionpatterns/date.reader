@@ -3,7 +3,7 @@
 \alias{apply.lubridate.fun}
 \title{apply.lubridate.fun}
 \usage{
-apply.lubridate.fun(format, txt, tz)
+apply.lubridate.fun(format, txt, tz = getOption("date.reader")$tz)
 }
 \arguments{
 \item{format}{character; the name of the date format (case insensitive)}

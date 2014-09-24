@@ -20,7 +20,8 @@
 #' @note Internal function that is not exported
 #' @include Constants.R
 
-apply.lubridate.fun <- function(format, txt, tz) {
+apply.lubridate.fun <- function(format, txt, tz=getOption("date.reader")$tz ) {
+  
   retval <- suppressWarnings(
     switch( format,
            ymd_hms.numeric = lubridate::ymd_hms(txt, tz=tz),
@@ -45,4 +46,5 @@ apply.lubridate.fun <- function(format, txt, tz) {
            ymd.alt = lubridate::ymd(txt, tz=tz)))
   
   return(retval)
+  
 }
