@@ -16,6 +16,7 @@
 #' @seealso 
 #'   \code{\link[base]{as.POSIXct}} \cr
 #'   \code{\link[base]{strptime}} for \code{format} strings
+#'   \code{\link[lubridate]{parse_date_time}} for \code{orders} strings
 #'   
 #' @examples 
 #'   # -tk
@@ -38,7 +39,7 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
   if (is.na(fmt)) {
     return(NA)
   }
-  return(string.to.POSIXct(x, tz=tz, format=fmt))
+  return(string.to.POSIXct(x, tz=tz, orders=fmt))
 }
 
 
@@ -48,9 +49,10 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
 #' 
 #' @param x character; vector to convert to a POSIX date
 #' 
-#' @param format character; name of the format for the values. If
+#' @param orders character; name of the format for the values. If
 #' this parameter is NA, then the function will try to guess the format
 #' for each value
+#' The possible values for orders is the same as in lubridate::parse_date_time
 #' @param tz character; optional time zone
 #' 
 #'
@@ -60,36 +62,36 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
 #' @seealso 
 #'   \code{\link[base]{as.POSIXct}} \cr
 #'   \code{\link[base]{strptime}} for \code{format} strings
+#'   \code{\link[lubridate]{parse_date_time}} for \code{orders} strings
 #'   
 #' @examples 
-#' 
-#' \dontrun{ 
+#'  
 #'   dts <- c( '20140210', '19791118', '19720329' )  
-#'   string.to.POSIXct( dts ) 
+#'   date.reader:::string.to.POSIXct( dts, NULL) 
 #'      
 #'   dts <- rep( '20140210', 10 )
-#'   string.to.POSIXct( dts )  
+#'   date.reader:::string.to.POSIXct( dts, NULL )  
 #'   
 #'   dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
-#'   string.to.POSIXct( dts )  
+#'   date.reader:::string.to.POSIXct( dts, NULL )  
 #'  
-#'   string.to.POSIXct( dts, format='ymd' )
-#' } 
+#'   date.reader:::string.to.POSIXct( dts, 'ymd' )
+#' 
 #' @rdname as.POSIXct.R
 #' @include which.format.R parse.date.R
 
-string.to.POSIXct <- function( x, format, tz=getOption("date.reader")$tz ) {
+string.to.POSIXct <- function( x, orders, tz=getOption("date.reader")$tz ) {
  
-  check.regex <- if ( is.null(format) ) TRUE else FALSE 
+  check.regex <- if ( is.null(orders) ) TRUE else FALSE 
 
   f <- function(txt) {
-    if ( is.null(format) ) {
-      format <- which.format(txt)
+    if ( is.null(orders) ) {
+      orders <- which.format(txt)
     }
-    if ( is.null(format) ) {
+    if ( is.null(orders) ) {
       return(NA)
     }
-    ret <- .parse.date(txt, format, tz=tz, check.regex=check.regex)
+    ret <- .parse.date(txt, orders, tz=tz, check.regex=check.regex)
     return(ret)
   }
   

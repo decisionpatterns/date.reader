@@ -70,10 +70,9 @@ which.format <- function(x, nTrials=1, nErrors=0) {
 #'   
 #' @examples 
 #' 
-#'  \dontrun{
-#'    .which.format("January 11, 2014")
-#'    .which.format("2014/02/16")
-#'  }
+#'    date.reader:::.which.format("January 11, 2014")
+#'    date.reader:::.which.format("2014/02/16")
+#'  
 #'    
 #' @note Internal function that is not exported
 #' @rdname which.format

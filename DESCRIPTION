@@ -15,7 +15,6 @@ License: GPL (>= 2) | file LICENSE
 LazyData: true
 Collate:
     'Constants.R'
-    'apply.lubridate.fun.R'
     'which.format.R'
     'parse.date.R'
     'as.POSIXct.R'

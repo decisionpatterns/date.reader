@@ -22,12 +22,12 @@
 
 type.convert <- function(x, ...) {
   
-  format <- which.format(x, ...)
+  orders <- which.format(x, ...)
 
-  if ( is.na(format) ) {
+  if ( is.na(orders) ) {
     return( utils::type.convert(x, ...) )
   }
   
-  return( string.to.POSIXct(x, format=format) )
+  return( string.to.POSIXct(x, orders=orders) )
 
 }

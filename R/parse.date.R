@@ -1,7 +1,7 @@
 #' .parse.date
 #' 
 #' @param txt character; value to convert to a POSIX date
-#' @param format character; name of the format, e.g. "MDY"
+#' @param orders character; name of the format, e.g. "MDY"
 #' @param tz character; optional time zone
 #' @param check.regex Logical; if TRUE, check syntax of \code{txt} before 
 #'   calling lubridate function.
@@ -14,20 +14,17 @@
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'   \dontrun{
-#'    .parse.date( "January 11, 2014", "MDY" )
-#'    .parse.date( "2014/02/16", "YMD" )
-#'    .parse.date( "2014-08-05", "YMD" )
-#'    .parse.date( "20140805", "ymd.numeric")
-#'    .parse.date( "14/08/05", "ymd.alt")
-#'   }
+#'    date.reader:::.parse.date( "January 11, 2014", "MDY" )
+#'    date.reader:::.parse.date( "2014/02/16", "YMD" )
+#'    date.reader:::.parse.date( "2014-08-05", "YMD" )
+#'    date.reader:::.parse.date( "20140805", "ymd.numeric")
+#'    date.reader:::.parse.date( "14/08/05", "ymd.alt")
 #'     
 #' @note Internal function, a wrapper for lubridate functions
 #'  
-#' @include apply.lubridate.fun.R 
 #' @rdname parse.date
 
-.parse.date <- function( txt, format, tz=getOption("date.reader")$tz 
+.parse.date <- function( txt, orders, tz=getOption("date.reader")$tz 
   , check.regex=TRUE
 ) {
 
@@ -35,7 +32,7 @@
   txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
   
   if (check.regex) {
-    regex <- lookup.regex(format)
+    regex <- lookup.regex(orders)
     if (is.na(regex)) {
       return(NA)
     }
@@ -43,7 +40,12 @@
       return(NA)
     }
   }
-
-  return( apply.lubridate.fun(format, txt, tz) )
+  orders <- tolower(orders)
+  index <- gregexpr(".", orders, fixed=TRUE)
+  index <- as.integer(index[[1]])
   
+  if (index > 1) {
+    orders <- substr(orders, 1, index-1)
+  }
+  return(lubridate::parse_date_time(txt, orders, tz=tz))  
 }
