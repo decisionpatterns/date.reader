@@ -89,9 +89,9 @@ read.table <- function(file, ...) {
 
     x <- dat[, col.idx]
     nErrors <- getOption("date.reader")$nErrors 
-    nTrials <- getOption("date.reader")$nTrials
+    autostart <- getOption("date.reader")$autostart
     
-    fmt <- which.format(x, nErrors=nErrors, nTrials=nTrials)
+    fmt <- which.format(x, nErrors=nErrors, autostart=autostart)
     
     if (!is.na(fmt)) {
       x <- string.to.POSIXct(x, orders=fmt)

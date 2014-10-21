@@ -2,7 +2,7 @@
 #' 
 #' @param x character; values to parse
 #'
-#' @param nTrials integer; number of strings to check before deciding
+#' @param autostart integer; number of strings to check before deciding
 #' the format
 #' 
 #' @param nErrors integer; the number of unparsable strings to allow. 
@@ -26,8 +26,8 @@
 #'         
 #' @export
 
-can.posix <- function( x, nTrials=min(length(x),100), nErrors= 0) {
-  format <- which.format(x, nTrials=nTrials, nErrors=nErrors)
+can.posix <- function( x, autostart=min(length(x),100), nErrors= 0) {
+  format <- which.format(x, autostart=autostart, nErrors=nErrors)
 
   return (! is.na(format))
   

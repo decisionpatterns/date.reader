@@ -7,7 +7,7 @@ NULL
 #' 
 #' @param x character; values to convert to a POSIX date
 #' 
-#' @param nTrials integer; number of strings to check before deciding
+#' @param autostart integer; number of strings to check before deciding
 #' the format
 #' 
 #' @param nErrors integer; the number of unparsable strings to allow. 
@@ -23,14 +23,15 @@ NULL
 #'   
 #' @examples 
 #'   x <- c("January 11, 2014", "February 15, 1958", "2015/03/23")
-#'   which.format(x, nTrials=3, nErrors=1)
+#'   which.format(x, autostart=3, nErrors=1)
 #'    
 #' @export
   
-which.format <- function(x, nTrials=1, nErrors=0) {
+which.format <- function(x, autostart=1, nErrors=0) {
   
-  nTrials.actual <- min(length(x), nTrials)
-  z <- x[1:nTrials.actual]
+  autostart.actual <- min(length(x), autostart)
+  indices = seq(from=1, to=length(x), length.out=autostart.actual)
+  z <- x[indices]
   formats <- unlist(lapply(z, .which.format))
   w <- table(formats)
   
@@ -41,14 +42,14 @@ which.format <- function(x, nTrials=1, nErrors=0) {
   n <-max(w)
   format <- names(which(w==n))
   format <- format[[1]]
-  nErrors.actual <- nTrials.actual - n
+  nErrors.actual <- autostart.actual - n
   
   if (nErrors.actual > nErrors) {
     return(NA)
   }
   
   if (grepl(".numeric", format)) {
-    if (nTrials.actual < nTrials) {
+    if (autostart.actual < autostart) {
       return(NA)
     }
   }
