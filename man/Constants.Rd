@@ -52,7 +52,7 @@
 \alias{kYear}
 \alias{kYear4}
 \title{Constants used internally to date.reader packaged}
-\format{\preformatted{ chr [1:23] "january" "jan" "february" "feb" "march" "mar" "april" "april" "may" "june" "jun" "july" "jul" "august" "aug" "september" "sep" ...
+\format{\preformatted{ chr [1:23] "january" "jan" "february" "feb" "march" "mar" "april" "april" "may" "june" "jun" ...
 }}
 \usage{
 \method{all}{regex.names}()
