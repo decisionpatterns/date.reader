@@ -27,10 +27,14 @@ NULL
 #'    
 #' @export
   
-which.format <- function(x, autostart=1, nErrors=0) {
+which.format <- function(
+    x
+  , autostart=getOption('date.reader')$autostart
+  , nErrors=getOption('date.reader')$autostart
+) {
   
   autostart.actual <- min(length(x), autostart)
-  indices = seq(from=1, to=length(x), length.out=autostart.actual)
+  indices = round( seq(from=1, to=length(x), length.out=autostart.actual) )
   z <- x[indices]
   formats <- unlist(lapply(z, .which.format))
   w <- table(formats)
@@ -48,12 +52,10 @@ which.format <- function(x, autostart=1, nErrors=0) {
     return(NA)
   }
   
-  if (grepl(".numeric", format)) {
-    if (autostart.actual < autostart) {
+  if ( grepl(".numeric", format) ) 
+    if (autostart.actual < autostart) 
       return(NA)
-    }
-  }
-  
+    
   return(format)
   
 }
@@ -73,23 +75,19 @@ which.format <- function(x, autostart=1, nErrors=0) {
 #' 
 #'    date.reader:::.which.format("January 11, 2014")
 #'    date.reader:::.which.format("2014/02/16")
-#'  
 #'    
 #' @note Internal function that is not exported
 #' @rdname which.format
    
 .which.format <- function(txt) {
-  for (fmt in all.regex.names()) {
-    if (grepl(".numeric", fmt)) {
-      if (grepl("[^0-9]", txt)) {
-        next
-      }
-    }
+  for (fmt in all.regex.names ) {
+    
+    if ( grepl(".numeric", fmt) && grepl("[^0-9]", txt) ) next      
     z <- .parse.date(txt, fmt)
-    if (! is.na(z)) {
-      return(fmt)
-    }
+    if ( ! is.na(z) ) return(fmt)
+    
   }
+  
   return(NA)
   
 }

@@ -33,13 +33,11 @@
 #' @method as.POSIXct character
 #' @export
 
-
 as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
   fmt <- which.format(x)
-  if (is.na(fmt)) {
-    return(NA)
-  }
-  return(string.to.POSIXct(x, tz=tz, orders=fmt))
+  if ( is.na(fmt) ) return(NA)
+
+  return( string.to.POSIXct(x, tz=tz, orders=fmt) )
 }
 
 
@@ -49,19 +47,21 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
 #' 
 #' @param x character; vector to convert to a POSIX date
 #' 
-#' @param orders character; name of the format for the values. If
-#' this parameter is NA, then the function will try to guess the format
-#' for each value
-#' The possible values for orders is the same as in lubridate::parse_date_time
-#' @param tz character; optional time zone
+#' @param orders character; name of the format (e.g. 'ymd' ). If this parameter 
+#' is \code{NA}, then the function will try to guess the format. The possible 
+#' values for orders is the same as in \code{\link[lubridate]{parse_date_time}}
 #' 
+#' @param tz character; optional time zone
 #'
+#' @details 
+#'   - tk
+#' 
 #' @return 
 #'   POSIXct vector (or NA, if a value cannot be parsed)
 #'
 #' @seealso 
 #'   \code{\link[base]{as.POSIXct}} \cr
-#'   \code{\link[base]{strptime}} for \code{format} strings
+#'   \code{\link[base]{strptime}} for \code{format} strings \cr
 #'   \code{\link[lubridate]{parse_date_time}} for \code{orders} strings
 #'   
 #' @examples 

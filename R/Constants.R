@@ -7,10 +7,7 @@
 #' @rdname Constants
 
 
-#' @rdname Constants
-all.regex.names <- function() {
-  return( names(kFormats) )
-}
+
 
 #' @rdname Constants
 kMonthWords <- c(
@@ -316,4 +313,7 @@ kFormats <- list(
 )
 
 
+
+#' @rdname Constants
+all.regex.names <- names(kFormats) 
 
