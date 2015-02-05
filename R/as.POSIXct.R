@@ -30,7 +30,7 @@
 #'  as.POSIXct( dts )
 #'
 # @include which.format.R   
-#' @method as.POSIXct character
+# @method as.POSIXct character
 #' @export
 
 as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {

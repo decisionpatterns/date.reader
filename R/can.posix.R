@@ -1,5 +1,7 @@
 #' can.posix
 #' 
+#' Determine if an object can be coerced to a POSIXct vector 
+#' 
 #' @param x character; values to parse
 #'
 #' @param autostart integer; number of strings to check before deciding
@@ -16,7 +18,8 @@
 #' be interpreted as dates, or if there is no consistent format.
 #'
 #' @seealso 
-#'   \code{\link{which.format}}
+#'   \code{\link{which.format}} \cr
+#'   \code{canCoerce} from the methods package for similar methods
 #'   
 #' @examples 
 #'   can.posix("12-11-10")

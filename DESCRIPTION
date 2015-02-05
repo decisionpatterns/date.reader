@@ -1,7 +1,7 @@
 Package: date.reader
 Title: This packages extends type.convert and read.table to automatically detect
     and coerce date fields to POSIX.
-Version: 0.3.1
+Version: 0.3.2
 Date: 2014-01-15
 Author: "DecisionPatterns [aut, cre]"
 Maintainer: Daryl McCullough <dmcullough@decisionpatterns.com>
