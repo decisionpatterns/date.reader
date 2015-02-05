@@ -4,7 +4,7 @@
 \alias{.parse.date}
 \title{.parse.date}
 \usage{
-.parse.date(txt, orders, tz = getOption("date.reader")$tz,
+.parse.date(txt, orders, tz = getOption("date.reader.tz"),
   check.regex = TRUE)
 }
 \arguments{

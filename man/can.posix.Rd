@@ -23,13 +23,14 @@ the same format), it returns TRUE. It returns false if they cannot
 be interpreted as dates, or if there is no consistent format.
 }
 \description{
-can.posix
+Determine if an object can be coerced to a POSIXct vector
 }
 \examples{
 can.posix("12-11-10")
   can.posix("13-13-13")
 }
 \seealso{
-\code{\link{which.format}}
+\code{\link{which.format}} \cr
+  \code{canCoerce} from the methods package for similar methods
 }
 

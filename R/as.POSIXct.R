@@ -29,11 +29,15 @@
 #'  dts <- c( '14-02-10', '79-11-18' ) # FAIL(?)
 #'  as.POSIXct( dts )
 #'
+#'  
 # @include which.format.R   
 # @method as.POSIXct character
 #' @export
 
-as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
+as.POSIXct <- function( x, tz=getOption("date.reader.tz"), ... ) UseMethod('as.POSIXct')
+
+#' @export
+as.POSIXct.character <- function( x, tz=getOption("date.reader.tz"), ... ) {
   fmt <- which.format(x)
   if ( is.na(fmt) ) return(NA)
 
@@ -77,10 +81,10 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader")$tz, ...) {
 #'  
 #'   date.reader:::string.to.POSIXct( dts, 'ymd' )
 #' 
-#' @rdname as.POSIXct.R
+#' @rdname as.POSIXct
 #' @include which.format.R parse.date.R
 
-string.to.POSIXct <- function( x, orders, tz=getOption("date.reader")$tz ) {
+string.to.POSIXct <- function( x, orders, tz=getOption("date.reader.tz") ) {
  
   check.regex <- if ( is.null(orders) ) TRUE else FALSE 
 
