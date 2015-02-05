@@ -33,6 +33,7 @@ x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")
   which.format(x, autostart=3, nErrors=1)
 }
 \seealso{
-\code{\link[base]{as.POSIXct}}
+\code{\link[base]{as.POSIXct}} \cr
+  \code{\link[lubridate]{guess_formats}} \cr
 }
 

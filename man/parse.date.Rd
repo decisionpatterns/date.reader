@@ -16,6 +16,14 @@
 
 \item{check.regex}{Logical; if TRUE, check syntax of \code{txt} before
   calling lubridate function.}
+
+\item{orders}{character vector of date-time formats as described in
+\code{\link[lubridate]{parse_date_time}}. Each order string is
+series of formatting characters as listed \code{\link[base]{strptime}} but
+without the "%" prefix, for example "ymd" will match all the possible
+dates in year, month, day order. Formatting orders might include
+arbitrary separators. These are discarded. See details for implemented
+formats.}
 }
 \value{
 POSIXct object representing a date (or datetime), or NA
@@ -28,11 +36,15 @@ if the input cannot be parsed.
 Internal function, a wrapper for lubridate functions
 }
 \examples{
-date.reader:::.parse.date( "January 11, 2014", "MDY" )
+date.reader:::.parse.date( "January 11, 2014", "mdy" )
+   date.reader:::.parse.date( "January 11, 2014", "MDY" )
+
    date.reader:::.parse.date( "2014/02/16", "YMD" )
    date.reader:::.parse.date( "2014-08-05", "YMD" )
+   date.reader:::.parse.date( c("2014-08-05","2014-08-06" ), "YMD" )
    date.reader:::.parse.date( "20140805", "ymd.numeric")
    date.reader:::.parse.date( "14/08/05", "ymd.alt")
+   date.reader:::.parse.date( "2/2/15", "dmy" )
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

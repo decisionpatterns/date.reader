@@ -38,7 +38,7 @@
 .parse.date <- function( 
     txt
   , orders
-  , tz = getOption(date.reader.tz)
+  , tz = getOption('date.reader.tz')
   , check.regex = TRUE
 ) {
 
