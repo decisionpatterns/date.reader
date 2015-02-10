@@ -50,7 +50,7 @@
 \alias{kYear}
 \alias{kYear4}
 \title{#}
-\format{\preformatted{ chr [1:21] "sunday" "sun" "su" "monday" "mon" "mo" "tuesday" "tue" "tu" ...
+\format{\preformatted{ chr [1:21] "sunday" "sun" "su" "monday" "mon" "mo" "tuesday" "tue" "tu" "wednesday" "wed" "we" ...
 }}
 \usage{
 kDayWords

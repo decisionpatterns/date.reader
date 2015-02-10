@@ -29,9 +29,10 @@
 #'         
 #' @export
 
-can.posix <- function( x, autostart=min(length(x),100), nErrors= 0) {
-  format <- which.format(x, autostart=autostart, nErrors=nErrors)
+can.posix <- function( x, autostart=min(length(x),100), nErrors= 0 ) {
+  
+  format <- which.format( x, autostart=autostart, nErrors=nErrors )
 
-  return (! is.na(format))
+  return ( ! is.na(format) )
   
 }

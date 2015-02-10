@@ -99,7 +99,7 @@ kMonth1 <- .collapse( c("(", kMonthName, "\\s*", ")") )
 kMonth2 <- .collapse( c("(", kMonthNum, kSeparator4, ")") )
 
 # #' @rdname Constants
-kMonth3 <- collapse( c("(", kMonth1, "|", kMonth2, ")") )
+kMonth3 <- .collapse( c("(", kMonth1, "|", kMonth2, ")") )
 
 # #' @rdname Constants
 kDMY <- .collapse( 
