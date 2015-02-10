@@ -22,12 +22,13 @@
 
 type.convert <- function(x, ...) {
   
-  orders <- which.format(x, ...)
+  orders <- which.orders(x, ...)
 
   if ( is.na(orders) ) {
     return( utils::type.convert(x, ...) )
   }
+  tz <- getOption("date.reader.tz")
   
-  return( string.to.POSIXct(x, orders=orders) )
+  return( lubridate::parse_date_time(x, orders, tz=tz) )
 
 }

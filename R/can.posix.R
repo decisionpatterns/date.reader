@@ -18,20 +18,20 @@
 #' be interpreted as dates, or if there is no consistent format.
 #'
 #' @seealso 
-#'   \code{\link{which.format}} \cr
+#'   \code{\link{which.orders}} \cr
 #'   \code{canCoerce} from the methods package for similar methods
 #'   
 #' @examples 
 #'   can.posix("12-11-10")
 #'   can.posix("13-13-13")
 #'      
-#' @include which.format.R
+#' @include which.orders.R
 #'         
 #' @export
 
 can.posix <- function( x, autostart=min(length(x),100), nErrors= 0 ) {
   
-  format <- which.format( x, autostart=autostart, nErrors=nErrors )
+  orders <- which.orders( x, autostart=autostart, nErrors=nErrors, force=TRUE )
 
   return ( ! is.na(format) )
   

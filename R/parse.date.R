@@ -1,8 +1,13 @@
-#' .parse.date
+#' Utilities for parsing date strings
 #' 
-#' @param txt character; value to convert to a POSIX date
-#' @param orders character; name of the format, e.g. "MDY"
-#' @param orders character vector of date-time formats as described in 
+#' @name parse.date
+NULL
+
+#' .parse.date.strict
+#' 
+#' @param txt character; value(s) to convert to a POSIX date
+#' @param orders character; name of the order, e.g. "mdy"
+#' orders are described in 
 #'   \code{\link[lubridate]{parse_date_time}}. Each order string is 
 #'   series of formatting characters as listed \code{\link[base]{strptime}} but
 #'   without the "%" prefix, for example "ymd" will match all the possible 
@@ -10,10 +15,10 @@
 #'   arbitrary separators. These are discarded. See details for implemented 
 #'   formats.
 #' @param tz character; optional time zone
-#' @param check.regex Logical; if TRUE, check syntax of \code{txt} before 
-#'   calling lubridate function.
 #'
 #' @note Internal function, a wrapper for lubridate functions
+#' @note If a vector input is given, the values that cannot be parsed
+#' will be given the value NA
 #'
 #' @return 
 #' POSIXct object representing a date (or datetime), or NA
@@ -23,49 +28,103 @@
 #'   \code{\link[base]{as.POSIXct}}
 #'   
 #' @examples 
-#'    date.reader:::.parse.date( "January 11, 2014", "mdy" )
-#'    date.reader:::.parse.date( "January 11, 2014", "MDY" )
+#'    date.reader:::.parse.date.strict( "January 11, 2014", "mdy" )
+#'    date.reader:::.parse.date.strict( "January 11, 2014", "MDY" )
 #'    
-#'    date.reader:::.parse.date( "2014/02/16", "YMD" )
-#'    date.reader:::.parse.date( "2014-08-05", "YMD" )
-#'    date.reader:::.parse.date( c("2014-08-05","2014-08-06" ), "YMD" )
-#'    date.reader:::.parse.date( "20140805", "ymd.numeric")
-#'    date.reader:::.parse.date( "14/08/05", "ymd.alt")
-#'    date.reader:::.parse.date( "2/2/15", "dmy" )
+#'    date.reader:::.parse.date.strict( "2014/02/16", "YMD" )
+#'    date.reader:::.parse.date.strict( "2014-08-05", "YMD" )
+#'    date.reader:::.parse.date.strict( c("2014-08-05","2014-08-06" ), "YMD" )
+#'    date.reader:::.parse.date.strict( "20140805", "ymd")
+#'    date.reader:::.parse.date.strict( "14/08/05", "ymd")
+#'    date.reader:::.parse.date.strict( "2/2/15", "dmy" )
 #'          
 #' @rdname parse.date
 
-.parse.date <- function( 
-    txt
-  , orders
-  , tz = getOption('date.reader.tz')
-  , check.regex = TRUE
-) {
-
-  txt <- gsub( "a.m.", "am", txt, ignore.case=TRUE )
-  txt <- gsub( "p.m.", "pm", txt, ignore.case=TRUE )
-  
-  # NOT SURE WHY THIS IS DONE?
-  if(check.regex) {
-    regex <- lookup.regex(orders)
-    
-    if( is.na(regex) ) return(NA)
-    if( ! grepl(regex, txt, ignore.case=TRUE) ) return(NA)  # VECTORIZE
-    
-  }
-  
-  # STRIP x.y -> x
+.parse.date.strict <- function( txt, orders, tz=getOption("date.reader.tz") ) {
   orders <- tolower(orders)
-  orders <- gsub( '\\..*$', '', orders )
-  
-  
-  # index <- gregexpr( ".", orders, fixed=TRUE )  # Find dot(.) in orders
-  # index <- as.integer(index[[1]])               # coerce to integer ?
-  # if( index > 1 ) orders <- substr(orders, 1, index-1) 
-  
-  
-  return( 
-    lubridate::parse_date_time(x=txt, orders=orders, tz=tz) 
-  )  
-  
+   
+  fun <- function(x) {
+    suppressWarnings(
+      z <- lubridate::parse_date_time(x, orders, tz=tz))
+    if (is.na(z)) return(NA)
+    m <- lubridate::month(z)
+    m1 <- .get_month_num(x)
+    if (m1 > 0) {
+      if (m1 != m) return(NA)
+    }
+    return(z)
+  }
+  do.call("c", lapply(txt, fun))
 }
+
+#' .parse.date.hetero
+#' parses a vector of date strings. May be different formats
+#'
+#' @return 
+#' POSIXct object representing a date (or datetime), or NA
+#' if the input cannot be parsed.
+#'
+#' @seealso 
+#'   \code{\link[base]{as.POSIXct}}
+#'   
+#' @examples 
+#'    date.reader:::.parse.date.hetero(
+#'      c("January 11, 2014", "2014/02/16", "2014-08-05", "20140805", "14/08/05")
+#'    )
+#' @note Internal function, a wrapper for lubridate functions
+#' @note "orders" argument here is a vector of orders to choose from
+#'  
+#' @rdname parse.date
+.parse.date.hetero <- function(txt, orders=all.orders, tz=getOption("date.reader.tz")) {
+  fun <- function(x) {
+    ord <- which.orders(x, orders=orders)
+    .parse.date.strict(x, ord, tz=tz)
+  }
+  do.call("c", lapply(txt, fun))
+}
+
+#' @rdname parse.date
+kMonthWords <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct","nov","dec")
+
+#' @rdname parse.date
+kMonthName <- paste(
+    c("((", paste(kMonthWords, collapse=")|("), "))"), collapse="")
+
+#' .get_month_num
+#' If a string contains a fragment of the name of a month, 
+#' it returns the month number.
+#' @param txtstr character; the string to test
+#' @return numeric; the month number, or -1 if none
+#' @examples 
+#'      date.reader:::.get_month_num("blahblahjanuaryblahblah")
+#' @rdname parse.date
+#' @note Internal function, not exported
+
+.get_month_num <- function(txtstr) {
+  txtstr <- tolower(txtstr)
+  res <- regexpr(kMonthName, txtstr)
+  if (res == -1) return(-1)
+  txtstr <- substr(txtstr, res, res+2)
+  return(which(kMonthWords==txtstr))
+}
+
+#' @rdname parse.date
+all.orders <- c(
+  "mdy",
+  "mdy_hms",
+  "mdy_hm",
+  "mdy_h",
+  "dmy",
+  "dmy_hms",
+  "dmy_hm",
+  "dmy_h", 
+  "ymd_hms",
+  "ymd_hm",
+  "ymd_h",
+  "ymd"
+)
+
+
+
+
+

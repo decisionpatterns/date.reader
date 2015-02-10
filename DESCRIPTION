@@ -10,20 +10,17 @@ Description: date.reader provides replacement type.convert and read.table
     using the lubridate package.
 Imports:
     lubridate (>= 1.3.3),
-    option.tools
 Depends:
     R (>= 3.1.0),
     option.tools(>= 0.1)
 License: GPL (>= 2) | file LICENSE
 LazyData: true
 Collate:
-    'Constants.R'
-    'which.format.R'
-    'parse.date.R'
     'as.POSIXct.R'
+    'which.orders.R'
     'can.posix.R'
     'date.reader-package.R'
-    'lookup.regex.R'
+    'parse.date.R'
     'read.table.R'
     'type.convert.R'
     'zzz.R'

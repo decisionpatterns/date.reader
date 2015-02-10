@@ -88,15 +88,15 @@ read.table <- function(file, ...) {
     }
 
     x <- dat[, col.idx]
-    nErrors <- getOption("date.reader.nErrors") 
-    autostart <- getOption("date.reader.autostart")
+    #nErrors <- getOption("date.reader.nErrors") 
+    #autostart <- getOption("date.reader.autostart")
     
-    fmt <- which.format(x, nErrors=nErrors, autostart=autostart)
-    
-    if (!is.na(fmt)) {
-      x <- string.to.POSIXct(x, orders=fmt)
+    orders <- which.orders(x)
+    tz <- getOption("date.reader.tz")
+    if (!is.na(orders)) {
+      x <- lubridate::parse_date_time(x, orders, tz=tz)
       dat[, col.idx] <- x
-      break
+      next
     }
   }
   
