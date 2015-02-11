@@ -13,8 +13,6 @@ table <- data.frame(name, birthday, weight)
 
 file = tempfile()
 write.table(table, file=file, quote=FALSE, sep="\t", row.names=FALSE)
-
-
 table.new <- read.table( file, header=TRUE, sep="\t", colClasses=c("factor", "POSIXct", "character"))
 dates <- table.new[[2]]
 expect_equivalent( dates[[1]], mdy("01/12/1954") )

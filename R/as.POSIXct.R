@@ -40,7 +40,7 @@ as.POSIXct <- function( x, tz=getOption("date.reader.tz"), ... ) UseMethod('as.P
 
 as.POSIXct.character <- function( x, tz=getOption("date.reader.tz"), ... ) {
   orders <- which.orders(x, force=TRUE)
-  if ( is.na(orders) ) return(NA)
+  if ( is.na(orders) ) return(rep(NA, length(x)))
   return( lubridate::parse_date_time(x, orders, tz=tz) )
 }
 

@@ -22,6 +22,8 @@ NULL
 #' format: 20141222; we don't want to consider this a date unless there are
 #' sufficient data, or if force == TRUE.
 #'
+#' @param ... list; extra parameters (unused)
+#'
 #' @description 
 #' 
 #' If the number of unparseable strings exceeds nErrors, return NA,
@@ -46,19 +48,12 @@ which.orders <- function( x
                           , autostart=getOption('date.reader.autostart')
                           , nErrors=getOption('date.reader.nErrors')
                           , force=FALSE
+                          , ...
 ) {
   autostart.actual <- min(length(x), autostart)
   nErrors <- round(nErrors*autostart.actual/autostart)
   indices <- round( seq(from=1, to=length(x), length.out=autostart.actual) )
   z <- x[indices]
-
-  if (! force) {
-    all.digits <- all(grepl("\\D*", z) == FALSE)   # special case: if it's a bunch of digits, don't assume it is a
-                                        # date unless you have sufficient data, or if force is TRUE
-    if (all.digits) {
-      if (autostart.actual < autostart) return(NA)
-    }
-  }
   
   formats <- lubridate::guess_formats(z, orders)
   if (is.null(formats)) {
@@ -77,10 +72,19 @@ which.orders <- function( x
   index <- which.min(errs)
   orders <- orders[[index]]
   
-  nErrors.actual <- errs[[index]]
-  if (nErrors.actual > nErrors) {
-    return(NA)
+  if (! force) {
+    all.digits <- all(grepl("\\D*", z) == FALSE)   # special case: if it's a 
+    # bunch of digits, don't assume it is a
+    # date unless you have sufficient data, or if force is TRUE
+    if (all.digits) {
+      if (autostart.actual < autostart) return(NA)
+    }
+    nErrors.actual <- errs[[index]]
+    if (nErrors.actual > nErrors) {
+      return(NA)
+    }
   }
-  return(orders)  
+  return(orders)
+
 }
 

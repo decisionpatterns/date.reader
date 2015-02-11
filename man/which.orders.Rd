@@ -5,7 +5,7 @@
 \usage{
 which.orders(x, orders = all.orders,
   autostart = getOption("date.reader.autostart"),
-  nErrors = getOption("date.reader.nErrors"), force = FALSE)
+  nErrors = getOption("date.reader.nErrors"), force = FALSE, ...)
 }
 \arguments{
 \item{x}{character; values to convert to a POSIX date}
@@ -24,6 +24,8 @@ giving up.}
 of strings is less than autostart. This is only relevant for the all-digits
 format: 20141222; we don't want to consider this a date unless there are
 sufficient data, or if force == TRUE.}
+
+\item{...}{list; extra parameters (unused)}
 }
 \value{
 character, name for the date orders, e.g. mdy, ymd_hm, etc.

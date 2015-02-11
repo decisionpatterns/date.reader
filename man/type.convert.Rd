@@ -11,21 +11,28 @@ type.convert(x, ...)
 \item{...}{list; extra arguments (from utils::type.convert, not used)}
 }
 \value{
-a vector of parsed values. If values
-can be interpreted as dates, returns a POSIXct vector otherwise, the values
-from utils::type.convert
+a vector of parsed values. If values can be interpreted as dates,
+returns a POSIXct vector otherwise, the values from utils::type.convert
 }
 \description{
-type.convert
+Convert a character vector to POSIXct, if appropriate. An extension to
+utils::type.convert.
+}
+\details{
+If the input has a recognized date format, then it is parsed and converted to POSIXct.
+Otherwise, the input is passed along to utils::type.convert.
+}
+\note{
+this function will only attempt to convert a vector to POSIXct if every item in the vector
+has the same format.
 }
 \examples{
 x <- type.convert( "2014-08-05" )
-  x <- type.convert( c("2014-08-05", "2014-08-12") )
-  x
-
-  class(x)  # "POSIXct" "POSIXt"
+x <- type.convert( c("2014-08-05", "2014-08-12") )
+class(x)  # "POSIXct" "POSIXt"
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}
+  \code{\link[utils]{type.convert}}
 }
 

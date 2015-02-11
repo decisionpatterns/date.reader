@@ -45,6 +45,7 @@ for (name in names(dts)) {
 
   ord <- ords[[name]]
   ord1 <- which.orders(dt)
+  ord2 <- which.orders(dt, force=TRUE) # ignore autostart
   
   if (! is.na(ord)) {
   suppressWarnings(
@@ -59,9 +60,12 @@ for (name in names(dts)) {
   expect_equivalent(
     .normalize_orders(ord)
     , .normalize_orders(ord1))
-  if (is.na(ord)) {
-    expect_equivalent(result, NA)
-  } else {
+  if (! is.na(ord)) {
+    expect_equivalent(
+      .normalize_orders(ord)
+      , .normalize_orders(ord2))
+  }
+  if (! is.na(ord2)) {
     expect_is( result, 'POSIXct')
     expect_false(is.null(result))
   }
