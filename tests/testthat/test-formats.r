@@ -88,6 +88,5 @@ for (name in names(dts)) {
     .normalize_orders(exp)
     , .normalize_orders(guess))
   expect_equivalent(z1, z2)
-  cat("example:", name, "dt:", dt, "expected:", exp, "guessed:", guess, "parsed:", z1, "standard:", std, "parsed std:", z2, "\n")
+  # cat("example:", name, "dt:", dt, "expected:", exp, "guessed:", guess, "parsed:", z1, "standard:", std, "parsed std:", z2, "\n")
 }
-

@@ -55,15 +55,19 @@ for (name in names(dts)) {
     result2 <- NA
   }
   
-  cat("example:", name, "orders:", ord, "guessed:", ord1, "\n")
-  cat("dt:", dt, "\n")
+  # cat("example:", name, "orders:", ord, "guessed:", ord1, "\n")
+  # cat("dt:", dt, "\n")
+  
   expect_equivalent(
-    .normalize_orders(ord)
-    , .normalize_orders(ord1))
+      .normalize_orders(ord)
+    , .normalize_orders(ord1)
+  )
+  
   if (! is.na(ord)) {
     expect_equivalent(
-      .normalize_orders(ord)
-      , .normalize_orders(ord2))
+        .normalize_orders(ord)
+      , .normalize_orders(ord2)
+    )
   }
   if (! is.na(ord2)) {
     expect_is( result, 'POSIXct')
