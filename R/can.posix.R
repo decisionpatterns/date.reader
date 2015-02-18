@@ -39,6 +39,6 @@ can.posix <- function(
     
   orders <- which.orders( x, autostart=autostart, nErrors=nErrors, force=TRUE )
 
-  return ( ! is.na(format) )
+  return ( ! is.na(orders) )
   
 }
