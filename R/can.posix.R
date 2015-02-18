@@ -37,7 +37,7 @@ can.posix <- function(
   
   if( autostart > length(x) ) autostart <- length(x)
     
-  orders <- which.orders( x, autostart=autostart, nErrors=nErrors, force=TRUE )
+  orders <- which.orders( x, autostart=autostart, nErrors=nErrors )
 
   return ( ! is.na(orders) )
   
