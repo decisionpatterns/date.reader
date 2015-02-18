@@ -41,14 +41,16 @@ NULL
 #'   x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")
 #'   which.orders(x, autostart=3, nErrors=1)
 #'    
+#' @import options    
 #' @export
   
-which.orders <- function( x
-                          , orders=all.orders
-                          , autostart=getOption('date.reader.autostart')
-                          , nErrors=getOption('date.reader.nErrors')
-                          , force=FALSE
-                          , ...
+which.orders <- function( 
+    x
+  , orders    = all.orders
+  , autostart = get_option( date.reader$autostart, 30 )
+  , nErrors   = get_option( date.reader$nErrors, 0 )
+  , force=FALSE
+  , ...
 ) {
   autostart.actual <- min(length(x), autostart)
   nErrors <- round(nErrors*autostart.actual/autostart)

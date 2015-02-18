@@ -29,8 +29,14 @@
 #'         
 #' @export
 
-can.posix <- function( x, autostart=min(length(x),100), nErrors= 0 ) {
+can.posix <- function( 
+    x
+  , autostart = options::get_option( date.reader$autostart, length(x) )
+  , nErrors   = options::get_option( date.reader$nErrors, 0 )
+) {
   
+  if( autostart > length(x) ) autostart <- length(x)
+    
   orders <- which.orders( x, autostart=autostart, nErrors=nErrors, force=TRUE )
 
   return ( ! is.na(format) )

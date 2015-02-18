@@ -1,30 +1,32 @@
 #' type.convert
 #' 
 #' Convert a character vector to POSIXct, if appropriate. An extension to 
-#' utils::type.convert.
-#' 
-#' If the input has a recognized date format, then it is parsed and converted to POSIXct.
-#' Otherwise, the input is passed along to utils::type.convert.
+#' \code{utils::type.convert}.
 #' 
 #' @param x character; 
 #' @param ... list; extra arguments (from utils::type.convert, not used)
 #'
-#' @return a vector of parsed values. If values can be interpreted as dates, 
-#' returns a POSIXct vector otherwise, the values from utils::type.convert
+#' @details
+#' If the input has a recognized date format, then it is parsed and converted 
+#' to POSIXct. Otherwise, the input is passed along to 
+#' \code{utils::type.convert}.
 #'
-#' 
+#' @return a vector of parsed values. If values can be interpreted as dates, 
+#' returns a POSIXct vector otherwise, the values from 
+#' \code{utils::type.convert}
+#'
 #' @seealso 
 #'   \code{\link[base]{as.POSIXct}}
 #'   \code{\link[utils]{type.convert}}
 #' 
 #' @examples 
 #'     
-#' x <- type.convert( "2014-08-05" )
-#' x <- type.convert( c("2014-08-05", "2014-08-12") )   
-#' class(x)  # "POSIXct" "POSIXt" 
+#'   x <- type.convert( "2014-08-05" )
+#'   x <- type.convert( c("2014-08-05", "2014-08-12") )   
+#'   class(x)  # "POSIXct" "POSIXt" 
 #'
-#' @note this function will only attempt to convert a vector to POSIXct if every item in the vector
-#' has the same format.
+#' @note this function will only attempt to convert a vector to POSIXct if every
+#' item in the vector has the same format.
 #' 
 #' @export
 
@@ -34,7 +36,7 @@ type.convert <- function(x, ...) {
   if ( is.na(orders) ) {
     return( utils::type.convert(x, ...) )
   }
-  tz <- getOption("date.reader.tz")
+  tz <- get_option( date.reader.tz$tz, 'UTC' )
   
   return( lubridate::parse_date_time(x, orders, tz=tz) )
 

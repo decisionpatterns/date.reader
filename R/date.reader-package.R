@@ -4,10 +4,14 @@
 #' the \code{type.convert} and \code{read.table} methods.
 #' 
 #' @details
-#' The package contains the following exported methods:
+#'
+#' The \code{date.reader} package is comprised of several exported functions and
+#' a few global options that control the behavior of those functions.
+#'    
+#' @section Exported Functions: 
 #' 
 #' \code{type.convert}: Overrides base::type.convert to automatically 
-#' converts character vectors to POSIXct objects, if they are parsable.
+#' converts character vectors to POSIXct objects if they are parsable.
 #' For anything other than a character vector, it works like base::type.convert.
 #' 
 #' \code{as.POSIXct.character}: A function that converts character vectors to 
@@ -23,25 +27,31 @@
 #' date strings into a column of POSIXct objects, if they can be parsed. 
 #' (Note: assumes all strings have a consistent format). For all columns that 
 #' cannot be parsed as dates, this works like base::read.table.
+#'
+#'  
+#' @section Options:
 #' 
-#' \strong{OPTIONS}
-#' This package introduces a number of options that affect how the code works:
+#' This functions in this package allow for a number of options that affect 
+#' how the date.parsing works. (Note: this package relies on the 
+#' \code{options} package. Each of these options is within the 
+#' \code{date.reader} option).
 #' 
-#' \code{tz}: the default time zone to use for parsing dates (initially set to 
-#' "UTC").  Note: if tz is the empty string, that represents the local time zone.
+#' \code{tz}: the default time zone to use for parsing dates. The default for 
+#' functions is to use "UTC". If \code{tz} is the empty string, the 
+#' local time zone is used.
 #'     
-#' \code{nErrors}: The number of errors in parsing strings in a vector before 
-#' giving up (initially set to 5)
+#' \code{nErrors}: The number of allowed errors in parsing strings in a vector 
+#' before giving up. The default 
 #' 
 #' \code{autostart}: The number of strings to consider before deciding on the 
 #' date format (initially 30)
-#' 
 #' 
 #' @name date.reader
 #' 
 #' @examples 
 #'   # -tk
 #'   
+#' @import lubridate options   
 #' @docType package
 
 NULL

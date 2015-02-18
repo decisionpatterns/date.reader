@@ -1,4 +1,4 @@
-#' Utilities for parsing date strings
+#' Internal functions for parsing date strings
 #' 
 #' @name parse.date
 NULL
@@ -26,21 +26,14 @@ NULL
 #'
 #' @seealso 
 #'   \code{\link[base]{as.POSIXct}}
-#'   
-#' @examples 
-#'    date.reader:::.parse.date.strict( "January 11, 2014", "mdy" )
-#'    date.reader:::.parse.date.strict( "January 11, 2014", "MDY" )
-#'    
-#'    date.reader:::.parse.date.strict( "2014/02/16", "YMD" )
-#'    date.reader:::.parse.date.strict( "2014-08-05", "YMD" )
-#'    date.reader:::.parse.date.strict( c("2014-08-05","2014-08-06" ), "YMD" )
-#'    date.reader:::.parse.date.strict( "20140805", "ymd")
-#'    date.reader:::.parse.date.strict( "14/08/05", "ymd")
-#'    date.reader:::.parse.date.strict( "2/2/15", "dmy" )
-#'          
+#'      
 #' @rdname parse.date
 
-.parse.date.strict <- function( txt, orders, tz=getOption("date.reader.tz") ) {
+.parse.date.strict <- function( 
+    txt
+  , orders
+  , tz=options::get_option( date.reader$tz, 'UTC' ) 
+) {
   orders <- tolower(orders)
    
   fun <- function(x) {
@@ -75,7 +68,12 @@ NULL
 #' @note "orders" argument here is a vector of orders to choose from
 #'  
 #' @rdname parse.date
-.parse.date.hetero <- function(txt, orders=all.orders, tz=getOption("date.reader.tz")) {
+#' @import options
+.parse.date.hetero <- function(
+    txt
+  , orders = all.orders
+  , tz = options::get_option( date.reader$tz, 'UTC' ) 
+) {
   fun <- function(x) {
     ord <- which.orders(x, orders=orders)
     .parse.date.strict(x, ord, tz=tz)
@@ -83,12 +81,15 @@ NULL
   do.call("c", lapply(txt, fun))
 }
 
+
 #' @rdname parse.date
 kMonthWords <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct","nov","dec")
 
 #' @rdname parse.date
 kMonthName <- paste(
     c("((", paste(kMonthWords, collapse=")|("), "))"), collapse="")
+
+
 
 #' .get_month_num
 #' If a string contains a fragment of the name of a month, 
@@ -123,8 +124,3 @@ all.orders <- c(
   "ymd_h",
   "ymd"
 )
-
-
-
-
-

@@ -1,7 +1,7 @@
 library(testthat)
 library(lubridate)
 
-context( "test-formats.R")
+context( "formats.R")
 
 .normalize_orders <- function(txt) {
   if (is.na(txt)) return(NA)

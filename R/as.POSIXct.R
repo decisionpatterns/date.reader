@@ -1,6 +1,7 @@
-#' as.POSIXct converts objects to POSIXct, if possible
+#' Converts objects to POSIXct, if possible
 #'
-#' @title as.POSIXct The generic conversion function to POSIXct
+#' as.POSIX provides a generic conversion function to POSIXct if possible
+#' 
 #' @param x character; vector to convert to a POSIX date
 #' @param tz character; optional time zone
 #' @param ... list; other optional arguments (from as.POSIXct, ignored)
@@ -29,16 +30,26 @@
 #'  as.POSIXct( dts )
 #'
 #'  
-# @include which.orders.R
+#' @import options 
 #' @export 
 
-as.POSIXct <- function( x, tz=getOption("date.reader.tz"), ... ) UseMethod('as.POSIXct')
+as.POSIXct <- function( 
+    x
+  , tz = get_option( date.reader$tz, "UTC")
+  , ... 
+) 
+  UseMethod('as.POSIXct')
+
 
 #' @rdname as.POSIXct
 #' @method as.POSIXct character
 #' @export
 
-as.POSIXct.character <- function( x, tz=getOption("date.reader.tz"), ... ) {
+as.POSIXct.character <- function( 
+    x
+  , tz = get_option( date.reader$tz, "UTC")
+  , ... 
+) {
   orders <- which.orders(x, force=TRUE)
   if ( is.na(orders) ) return(rep(NA, length(x)))
   return( lubridate::parse_date_time(x, orders, tz=tz) )
@@ -47,7 +58,11 @@ as.POSIXct.character <- function( x, tz=getOption("date.reader.tz"), ... ) {
 #' @rdname as.POSIXct
 #' @method as.POSIXct factor
 #' @export
-as.POSIXct.factor <- function( x, tz=getOption("date.reader.tz"), ...) {
+as.POSIXct.factor <- function( 
+    x
+  , tz=options::get_option( date.reader$tz, "UTC")
+  , ...
+) {
   txt <- as.character(x)
   as.POSIXct.character(txt, tz=tz, ...)
 }
