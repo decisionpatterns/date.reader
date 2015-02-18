@@ -11,7 +11,7 @@ context( "as.POSIX.R")
 
 dts <- list()
 ords <- list()
-res <- list()
+warn <- list()
 
   dts[["ex1"]]  <- rep("10/10/10", 20)
   ords[["ex1"]] <- "mdy"
@@ -21,9 +21,11 @@ res <- list()
   
   dts[["ex3"]]  <- c(rep("10/10/10", 20), "gibberish")
   ords[["ex3"]] <- "mdy"
+  warn[["ex3"]] <- TRUE
   
   dts[["ex4"]]  <- c(rep("10/10/10", 20), rep("gibberish", 6))
   ords[["ex4"]] <- NA # shouldn't parse--too many errors
+  warn[["ex4"]] <- TRUE
   
   dts[["ex5"]]  <- c( '20140210', '19791118', '19720329' )
   ords[["ex5"]] <- "ymd"
@@ -39,15 +41,27 @@ res <- list()
 
 
 options( date.reader = list(nErrors = 2) )
+options(warn=0)
 
 for (name in names(dts)) {
   dt <- dts[[name]]
-  result <- as.POSIXct(dt)
+  
+  wrn <- warn[[name]]
+  if (is.null(wrn)) {
+    wrn <- FALSE
+  }
+  if (wrn == FALSE) {
+    expect_that(result <- as.POSIXct(dt), not(gives_warning()))
+  } else {
+    expect_warning(result <- as.POSIXct(dt))
+  }
 
   ord <- ords[[name]]
+
   ord1 <- which.orders(dt)
+
   ord2 <- which.orders(dt, force=TRUE) # ignore autostart
-  
+
   if (! is.na(ord)) {
   suppressWarnings(
     result2 <- lubridate::parse_date_time(dt, ord, tz="UTC")
