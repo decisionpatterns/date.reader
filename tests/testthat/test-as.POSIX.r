@@ -41,7 +41,6 @@ warn <- list()
 
 
 options( date.reader = list(nErrors = 2) )
-options(warn=0)
 
 for (name in names(dts)) {
   dt <- dts[[name]]
