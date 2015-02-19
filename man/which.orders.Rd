@@ -2,7 +2,7 @@
 % Please edit documentation in R/which.orders.R
 \name{which.orders}
 \alias{which.orders}
-\title{Utilities for detecting the orders of date strings}
+\title{which.orders}
 \usage{
 which.orders(x, orders = all.orders,
   autostart = get_option(date.reader$autostart, 30),
@@ -11,10 +11,10 @@ which.orders(x, orders = all.orders,
 \arguments{
 \item{x}{character; values to convert to a POSIX date}
 
-\item{orders}{character; orders to choose from}
+\item{orders}{character; orders that can be returned}
 
-\item{autostart}{integer; number of strings to check before deciding
-the orders}
+\item{autostart}{integer; number of elements of \code{x} to check
+to determine the orders of \code{x}}
 
 \item{nErrors}{numeric; A non-negative number:
 if >= 1, the number of unparsable strings to allow
@@ -32,11 +32,12 @@ sufficient data, or if force == TRUE.}
 character, name for the date orders, e.g. mdy, ymd_hm, etc.
 }
 \description{
-Utilities for detecting the orders of date strings
-
 If the number of unparseable strings exceeds nErrors, return NA,
 which means that the strings are either not dates, or not a consistent
 format.
+}
+\details{
+detecting the date 'orders' of character vector
 }
 \examples{
 x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")

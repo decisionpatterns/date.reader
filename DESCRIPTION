@@ -1,13 +1,13 @@
 Package: date.reader
-Title: This packages extends type.convert and read.table to automatically detect
-    and coerce date fields to POSIX.
-Version: 0.4.1
+Title: Automatically detect and coercees date fields when reading and working
+    with data
+Version: 0.4.2
 Date: 2014-02-19
 Author: "DecisionPatterns [aut, cre]"
 Maintainer: Daryl McCullough <dmcullough@decisionpatterns.com>
-Description: date.reader provides replacement type.convert and read.table
-    methods that will automatically recognize and parse dates as POSIXct dates
-    using the lubridate package.
+Description: date.reader provides drop-in replacements for type.convert and
+    read.table functions that will automatically recognize and parse dates
+    as POSIXct dates using the lubridate package.
 Imports:
     lubridate (>= 1.3.3)
 Depends:

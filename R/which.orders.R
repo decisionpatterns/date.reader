@@ -1,16 +1,13 @@
-#' Utilities for detecting the orders of date strings
+#' which.orders 
 #' 
-#' @name which.orders
-NULL
-
-#' which.orders
-#' 
-#' @param orders character; orders to choose from
-#' 
+#' detecting the date 'orders' of character vector  
+#'
 #' @param x character; values to convert to a POSIX date
 #' 
-#' @param autostart integer; number of strings to check before deciding
-#' the orders
+#' @param orders character; orders that can be returned
+#' 
+#' @param autostart integer; number of elements of \code{x} to check 
+#' to determine the orders of \code{x}
 #' 
 #' @param nErrors numeric; A non-negative number:  
 #' if >= 1, the number of unparsable strings to allow

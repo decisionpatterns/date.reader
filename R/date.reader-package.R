@@ -56,4 +56,4 @@
 
 NULL
 
-date.reader = NULL
+date.reader = NULL  # This is needed for the options package

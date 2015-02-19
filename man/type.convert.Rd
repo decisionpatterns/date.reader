@@ -7,22 +7,22 @@
 type.convert(x, ...)
 }
 \arguments{
-\item{x}{character;}
+\item{x}{character; vector to be coerces to POSIXct if possible}
 
 \item{...}{list; extra arguments (from utils::type.convert, not used)}
 }
 \value{
 a vector of parsed values. If values can be interpreted as dates,
-returns a POSIXct vector otherwise, the values from
+returns a POSIXct vector otherwise, the values returned from
 \code{utils::type.convert}
 }
 \description{
-Convert a character vector to POSIXct, if appropriate. An extension to
+Coerces a character vector to POSIXct if possible. An extension to
 \code{utils::type.convert}.
 }
 \details{
 If the input has a recognized date format, then it is parsed and converted
-to POSIXct. Otherwise, the input is passed along to
+to POSIXct. Otherwise, the input is passed to
 \code{utils::type.convert}.
 }
 \note{
