@@ -36,7 +36,7 @@ type.convert <- function(x, ...) {
   if ( is.na(orders) ) {
     return( utils::type.convert(x, ...) )
   }
-  tz <- get_option( date.reader.tz$tz, 'UTC' )
+  tz <- get_option( date.reader$tz, 'UTC' )
   
   return( lubridate::parse_date_time(x, orders, tz=tz) )
 

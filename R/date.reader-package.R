@@ -55,3 +55,5 @@
 #' @docType package
 
 NULL
+
+date.reader = NULL
