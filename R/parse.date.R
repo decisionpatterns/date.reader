@@ -6,7 +6,6 @@ NULL
 #' .parse.date.strict
 #' 
 #' @param txt character; value(s) to convert to a POSIX date
-#' 
 #' @param orders character; name of the order, e.g. "mdy"
 #' orders are described in 
 #'   \code{\link[lubridate]{parse_date_time}}. Each order string is 
@@ -15,11 +14,9 @@ NULL
 #'   dates in year, month, day order. Formatting orders might include 
 #'   arbitrary separators. These are discarded. See details for implemented 
 #'   formats.
-#'   
 #' @param tz character; optional time zone
 #'
 #' @note Internal function, a wrapper for lubridate functions
-#' 
 #' @note If a vector input is given, the values that cannot be parsed
 #' will be given the value NA
 #'
@@ -72,10 +69,9 @@ NULL
 #'  
 #' @rdname parse.date
 #' @import options
-
 .parse.date.hetero <- function(
     txt
-  , orders = all.orders
+  , orders = get_option( date.reader$orders, all.orders )
   , tz = options::get_option( date.reader$tz, 'UTC' ) 
 ) {
   fun <- function(x) {
