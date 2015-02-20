@@ -1,14 +1,14 @@
-#' which.orders 
-#' 
+#' which.orders
+ 
 #' detecting the date 'orders' of character vector  
 #'
 #' @param x character; values to convert to a POSIX date
-#' 
+#'
 #' @param orders character; orders that can be returned
-#' 
+#'
 #' @param autostart integer; number of elements of \code{x} to check 
 #' to determine the orders of \code{x}
-#' 
+#'
 #' @param nErrors numeric; A non-negative number:  
 #' if >= 1, the number of unparsable strings to allow
 #' if <  1, the fraction of values that are allowed to be unparsable before 
@@ -43,14 +43,18 @@
   
 which.orders <- function( 
     x
-  , orders    = all.orders
+  , orders    = get_option( date.reader$orders, all.orders )
   , autostart = get_option( date.reader$autostart, 30 )
   , nErrors   = get_option( date.reader$nErrors, 0 )
   , force=FALSE
   , ...
 ) {
   autostart.actual <- min(length(x), autostart)
-  nErrors <- round(nErrors*autostart.actual/autostart)
+  if (nErrors < 1) { # a fraction
+    nErrors <- nErrors * autostart.actual
+  } else {
+    nErrors <- round(nErrors*autostart.actual/autostart)
+  }
   indices <- round( seq(from=1, to=length(x), length.out=autostart.actual) )
   z <- x[indices]
   
