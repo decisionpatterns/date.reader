@@ -93,7 +93,8 @@ which.orders <- function(
   if (! force) {
     # SPECIAL CASE: if all digits, don't assume it a date unless there is
     # sufficient data, or if force id TRUE
-    all.digits <- all( grepl("\\D*", z) == FALSE )  
+    all.digits <- all( grepl("\\D*", z) == FALSE )  # bad  
+    # all.digits <- all( ! grepl("\\D", z)  )       # okay
     if (all.digits) {
       if (autostart.actual < autostart) return(NA)
     }
