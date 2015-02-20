@@ -30,9 +30,8 @@ this function will only attempt to convert a vector to POSIXct if every
 item in the vector has the same format.
 }
 \examples{
-x <- type.convert( "2014-08-05" )
-  x <- type.convert( c("2014-08-05", "2014-08-12") )
-  class(x)  # "POSIXct" "POSIXt"
+type.convert( "2014-08-05" )
+  type.convert( c("2014-08-05", "2014-08-12") )
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

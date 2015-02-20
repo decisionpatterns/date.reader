@@ -35,9 +35,14 @@
 #'   \code{\link[lubridate]{guess_formats}} \cr
 #'   
 #' @examples 
+#'   # Same order, same format
 #'   x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")
+#'   which.orders(x)
+#'  
+#'   # Same order, different formats  
+#'   x <- c("January 11, 2014", "February 15, 1958", "3/3/1969")
 #'   which.orders(x, autostart=3, nErrors=1)
-#'    
+#'               
 #' @import options    
 #' @export
   
@@ -46,9 +51,10 @@ which.orders <- function(
   , orders    = all.orders
   , autostart = get_option( date.reader$autostart, 30 )
   , nErrors   = get_option( date.reader$nErrors, 0 )
-  , force=FALSE
+  , force     = FALSE
   , ...
 ) {
+  
   autostart.actual <- min(length(x), autostart)
   nErrors <- round(nErrors*autostart.actual/autostart)
   indices <- round( seq(from=1, to=length(x), length.out=autostart.actual) )
@@ -65,8 +71,8 @@ which.orders <- function(
     sum(is.na(z1))
   }
   
-  suppressWarnings(
-  errs <- lapply(orders, get_errors)
+  suppressWarnings( 
+    errs <- lapply(orders, get_errors)
   )
   index <- which.min(errs)
   orders <- orders[[index]]
@@ -86,4 +92,3 @@ which.orders <- function(
   return(orders)
 
 }
-
