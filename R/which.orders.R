@@ -42,7 +42,11 @@
 #'   # Same order, different formats  
 #'   x <- c("January 11, 2014", "February 15, 1958", "3/3/1969")
 #'   which.orders(x, autostart=3, nErrors=1)
-#'               
+#'           
+#'   which.orders( 20150101:20150131 )
+#'   which.orders( 20150101:20150131, autostart = 50  )
+#'   which.orders( 2015001:2015365 )   # NA
+#'                
 #' @import options    
 #' @export
   
@@ -55,8 +59,10 @@ which.orders <- function(
   , ...
 ) {
   
-  autostart.actual <- min(length(x), autostart)
-  nErrors <- round(nErrors*autostart.actual/autostart)
+  # initialize
+  autostart.actual = min( length(x), autostart )
+  nErrors          = round( nErrors * autostart.actual/autostart )
+
   indices <- round( seq(from=1, to=length(x), length.out=autostart.actual) )
   z <- x[indices]
   
@@ -78,16 +84,15 @@ which.orders <- function(
   orders <- orders[[index]]
   
   if (! force) {
-    all.digits <- all(grepl("\\D*", z) == FALSE)   # special case: if it's a 
-    # bunch of digits, don't assume it is a
-    # date unless you have sufficient data, or if force is TRUE
+    # SPECIAL CASE: if all digits, don't assume it a date unless there is
+    # sufficient data, or if force id TRUE
+    all.digits <- all( grepl("\\D*", z) == FALSE )  
     if (all.digits) {
       if (autostart.actual < autostart) return(NA)
     }
     nErrors.actual <- errs[[index]]
-    if (nErrors.actual > nErrors) {
-      return(NA)
-    }
+    if (nErrors.actual > nErrors) return(NA)
+    
   }
   return(orders)
 

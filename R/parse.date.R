@@ -35,8 +35,9 @@ NULL
 .parse.date.strict <- function( 
     txt
   , orders
-  , tz=options::get_option( date.reader$tz, 'UTC' ) 
+  , tz     = get_option( date.reader$tz, 'UTC' )
 ) {
+  
   orders <- tolower(orders)
    
   fun <- function(x) {
