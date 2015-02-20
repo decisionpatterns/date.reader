@@ -40,7 +40,12 @@ format.
 detecting the date 'orders' of character vector
 }
 \examples{
-x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")
+# Same order, same format
+  x <- c("January 11, 2014", "February 15, 1958", "March 3, 1969")
+  which.orders(x)
+
+  # Same order, different formats
+  x <- c("January 11, 2014", "February 15, 1958", "3/3/1969")
   which.orders(x, autostart=3, nErrors=1)
 }
 \seealso{
