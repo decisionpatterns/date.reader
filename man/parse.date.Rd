@@ -13,10 +13,9 @@
 \format{\preformatted{ chr [1:12] "jan" "feb" "mar" "apr" "may" "jun" "jul" "aug" "sep" "oct" "nov" "dec"
 }}
 \usage{
-.parse.date.strict(txt, orders, tz = options::get_option(date.reader$tz,
-  "UTC"))
+.parse.date.strict(txt, orders, tz = get_option(date.reader$tz, "UTC"))
 
-.parse.date.hetero(txt, orders = all.orders,
+.parse.date.hetero(txt, orders = get_option(date.reader$orders, all.orders),
   tz = options::get_option(date.reader$tz, "UTC"))
 
 kMonthWords

@@ -46,6 +46,9 @@
 #' \code{autostart}: The number of strings to consider before deciding on the 
 #' date format (initially 30)
 #' 
+#' \code{orders}: The character vector of orders to allow for parsing, such as
+#' 'ymd' or 'mdy'. This can ensure that only one date order is used for parsing.
+#' 
 #' @name date.reader
 #' 
 #' @examples 
