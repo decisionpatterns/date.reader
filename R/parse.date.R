@@ -6,7 +6,7 @@ NULL
 #' .parse.date.strict
 #' 
 #' @param txt character; value(s) to convert to a POSIX date
-#' @param orders character; name of the order, e.g. "mdy"
+#' @param order character; name of the order, e.g. "mdy"
 #' orders are described in 
 #'   \code{\link[lubridate]{parse_date_time}}. Each order string is 
 #'   series of formatting characters as listed \code{\link[base]{strptime}} but
@@ -31,17 +31,24 @@ NULL
 
 .parse.date.strict <- function( 
     txt
-  , orders
+  , order
   , tz     = get_option( date.reader$tz, 'UTC' )
 ) {
   
-  orders <- tolower(orders)
+  if (is.na(order)) {
+    return(NA)
+  }
+  
+  order <- tolower(order)
    
   fun <- function(x) {
     suppressWarnings(
-      z <- lubridate::parse_date_time(x, orders, tz=tz))
+      z <- lubridate::parse_date_time(x, order, tz=tz))
     if (is.na(z)) return(NA)
     m <- lubridate::month(z)
+    # the following is a sanity check. If the name of a month appears in the string,
+    # for example, "January", then the parsing should result in month = January.
+    # If this isn't true, then it was probably misparsed
     m1 <- .get_month_num(x)
     if (m1 > 0) {
       if (m1 != m) return(NA)
@@ -52,7 +59,15 @@ NULL
 }
 
 #' .parse.date.hetero
+#' 
 #' parses a vector of date strings. May be different formats
+#' 
+#' @param orders character; orders that will be considered
+#'
+#' @param force logical; TRUE means try to interpret as date, even if number
+#' of strings is less than autostart. This is only relevant for the all-digits
+#' format: 20141222; we don't want to consider this a date unless there are
+#' sufficient data, or if force == TRUE.
 #'
 #' @return 
 #' POSIXct object representing a date (or datetime), or NA
@@ -73,10 +88,11 @@ NULL
 .parse.date.hetero <- function(
     txt
   , orders = get_option( date.reader$orders, all.orders )
-  , tz = options::get_option( date.reader$tz, 'UTC' ) 
+  , tz = options::get_option( date.reader$tz, 'UTC' )
+  , force = TRUE
 ) {
   fun <- function(x) {
-    ord <- which.orders(x, orders=orders)
+    ord <- which.orders(x, orders=orders, force=force)
     .parse.date.strict(x, ord, tz=tz)
   }
   do.call("c", lapply(txt, fun))

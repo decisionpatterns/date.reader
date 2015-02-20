@@ -28,7 +28,7 @@ warn <- list()
   warn[["ex4"]] <- TRUE
   
   dts[["ex5"]]  <- c( '20140210', '19791118', '19720329' )
-  ords[["ex5"]] <- "ymd"
+  ords[["ex5"]] <- NA # for all-digit case, need more examples
   
   dts[["ex6"]]  <- c('January 31, 2011', 'March 23, 1957', 'October 26, 1929')
   ords[["ex6"]] <- "mdy"
@@ -43,6 +43,7 @@ warn <- list()
 options( date.reader = list(nErrors = 2) )
 
 for (name in names(dts)) {
+  #cat("example: ", name)
   dt <- dts[[name]]
   
   wrn <- warn[[name]]
@@ -61,15 +62,15 @@ for (name in names(dts)) {
 
   ord2 <- which.orders(dt, force=TRUE) # ignore autostart
 
-  if (! is.na(ord)) {
+  if (! is.na(ord2)) {
   suppressWarnings(
-    result2 <- lubridate::parse_date_time(dt, ord, tz="UTC")
+    result2 <- lubridate::parse_date_time(dt, ord2, tz="UTC")
   )
   } else {
     result2 <- NA
   }
   
-  # cat("example:", name, "orders:", ord, "guessed:", ord1, "\n")
+  #cat("example:", name, "orders:", ord, "guessed:", ord1, "\n")
   # cat("dt:", dt, "\n")
   # browser()
   expect_equivalent(
@@ -77,12 +78,15 @@ for (name in names(dts)) {
     , .normalize_orders(ord1)
   )
   
+  expect_equivalent( result, result2 )
+  
   if (! is.na(ord)) {
     expect_equivalent(
         .normalize_orders(ord)
       , .normalize_orders(ord2)
     )
   }
+  
   if (! is.na(ord2)) {
     expect_is( result, 'POSIXct')
     expect_false(is.null(result))

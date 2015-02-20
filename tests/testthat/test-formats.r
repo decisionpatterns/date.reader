@@ -77,16 +77,17 @@ expected[["ex11"]] <- "dmy"
 standard[["ex11"]] <- "2015/01/12"
 
 for (name in names(dts)) {
+  #cat("name:", name)
   dt <- dts[[name]]
   exp <- expected[[name]]
   std <- standard[[name]]
   ord.std <- to.standard[[exp]]
-  guess <- which.orders(dt)
+  guess <- which.orders(dt, force=TRUE) # ignore autostart, and try to interpret as date
   z1 <- .parse.date.strict(dt, exp)
   z2 <- lubridate::parse_date_time(std, ord.std)
   expect_equivalent(
     .normalize_orders(exp)
     , .normalize_orders(guess))
   expect_equivalent(z1, z2)
-  # cat("example:", name, "dt:", dt, "expected:", exp, "guessed:", guess, "parsed:", z1, "standard:", std, "parsed std:", z2, "\n")
+  #cat("example:", name, "dt:", dt, "expected:", exp, "guessed:", guess, "parsed:", z1, "standard:", std, "parsed std:", z2, "\n")
 }
