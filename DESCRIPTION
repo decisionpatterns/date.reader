@@ -23,6 +23,7 @@ Collate:
     'can.posix.R'
     'date.reader-package.R'
     'parse.date.R'
+    'parse.dates.R'
     'read.table.R'
     'type.convert.R'
     'zzz.R'
