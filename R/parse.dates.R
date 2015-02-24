@@ -37,22 +37,10 @@ parse.dates.data.frame <- function(x, ...) {
   colClasses <- .compute.classes(colClasses, x)
   for (i in seq_len(ncol(x))) {
     cls <- colClasses[[i]]
-    force <- FALSE
-    if (is.na(cls)) {
-      force <- FALSE
-    } else if (cls == "POSIXct") {
-      force <- TRUE
-    } else {
-      next
-    }
     col <- x[, i]
-    orders <- which.orders(col, force=force)
-    tz <- options::get_option(date.reader$tz, 'UTC')
-    if (!is.na(orders)) {
-      col <- lubridate::parse_date_time(col, orders, tz=tz)
+    col <- parse.dates(col, colClasses = cls)
+    if (!is.na(col))
       x[, i] <- col
-      next
-    }
   }
   return(x)
 }
@@ -77,6 +65,22 @@ parse.dates.character <- function(x, ...) {
   }
   colClasses <- colClasses[[1]]
   tz <- args[["tz"]]
+  if (is.null(tz)) {
+    tz <- options::get_option(date.reader$tz, 'UTC')
+  }
+  orders <- args[["orders"]]
+  if (is.null(orders)) {
+    orders <- options::get_option(date.reader$orders, all.orders)
+  }
+  nErrors <- args[["nErrors"]]
+  if (is.null(nErrors)) {
+    nErrors <- options::get_option(date.reader$nErrors, 0)
+  }
+  autostart <- args[["autostart"]]
+  if (is.null(autostart)) {
+    autostart <- options::get_option(date.reader$autostart, 30)
+  }
+  
   if (is.na(colClasses)) {
     force = FALSE
   } else if (colClasses == "POSIXct") {
@@ -84,12 +88,14 @@ parse.dates.character <- function(x, ...) {
   } else {
     return(NA)
   }
-  orders <- which.orders(x, force=force)
+  orders <- which.orders(
+    x
+    , force=force
+    , orders=orders
+    , autostart=autostart
+    , nErrors=nErrors)
   if(is.na(orders)) {
     return(NA)
-  }
-  if (is.null(tz)) {
-    tz <- options::get_option(date.reader$tz, 'UTC')
   }
   
   lubridate::parse_date_time(x, orders, tz=tz)
