@@ -2,6 +2,10 @@
 
 S3method(as.POSIXct,character)
 S3method(as.POSIXct,factor)
+S3method(parse.dates,character)
+S3method(parse.dates,data.frame)
+S3method(parse.dates,data.table)
+S3method(parse.dates,default)
 export(as.POSIXct)
 export(can.posix)
 export(parse.dates)

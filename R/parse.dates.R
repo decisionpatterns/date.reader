@@ -1,9 +1,9 @@
-#' fix.date.columns
+#' parse.dates
 #' 
 #' @param ... additional arguments passed to \code{utils::read.table}
-#' @param table date.frame; the table to fix
+#' @param x data; the table to fix
 #'
-#' @return data frame. 
+#' @return data frame or data table
 #' 
 #' If a character column can be interpreted as dates, then translate
 #' values into POSIXct objects.
@@ -16,83 +16,106 @@
 #'   birthday <- c("01/22/1993", "02/25/1980", "03/31/1970")
 #'   birthday <- as.factor(birthday)
 #'   table <- data.frame(name,birthday)
-#'   
+#'   table1 <- data.table(table)
 #'   table.new <- parse.dates(table)
-#'      
+#'   table.new1 <- parse.dates(table1)
 #' @export
 
-parse.dates <- function(table, ...) {
-  args <- list(...)
+parse.dates <- function( 
+  x
+  , ... 
+) 
+  UseMethod('parse.dates')
 
+#' @rdname parse.dates
+#' @method parse.dates data.frame
+#' @export
+
+parse.dates.data.frame <- function(x, ...) {
+  args <- list(...)  
   colClasses <- args[['colClasses']]
-  
-  # two cases: colClasses has named elements
-  nams <- names(colClasses)
-  nonempty.names <- setdiff(nams, "")
-  named.colClass.elements <- (length(nonempty.names) > 0)
-
-  nams <- names(table)
-  cls.index <- 0
-  as.is <- args[['as.is']]
-  typ <- typeof(as.is)
-  as.is.logical <- (typ == "logical")
-  as.is.index <- 0
-
-  for (col.idx in seq_len(ncol(table))) {
-    name <-  nams[[col.idx]]
-    if (as.is.index == length(as.is)) {
-        as.is.index <- 0 #recycle
-    }
-    as.is.index <- as.is.index + 1
-    if (is.null(as.is)) {
-        as.is.current <- FALSE
-    } else if (as.is.logical) {
-      as.is.current <- as.is[[as.is.index]]
-      if (is.null(as.is.current) || is.na(as.is.current)) {
-        as.is.current <- FALSE
-      }
+  colClasses <- .compute.classes(colClasses, x)
+  for (i in seq_len(ncol(x))) {
+    cls <- colClasses[[i]]
+    force <- FALSE
+    if (is.na(cls)) {
+      force <- FALSE
+    } else if (cls == "POSIXct") {
+      force <- TRUE
     } else {
-        common <- intersect(as.is, c(name, col.idx))
-        as.is.current <- (length(common) > 0)
+      next
     }
-    if (as.is.current) {
-        next
-    }    
-
-    if (cls.index == length(colClasses)) {
-        cls.index <- 0
-    }
-    cls.index <- cls.index+1
-
-    if (is.null(colClasses)) {
-        cls <- NA
-    } else if (named.colClass.elements) {
-        cls <- colClasses[[name]]
-        if (is.null(cls)) {
-            cls <- NA
-        }
-    } else {
-        cls <- colClasses[[cls.index]]
-        if (is.null(cls)) {
-            cls <- NA
-        }
-    }
-      
-    if (! is.na(cls)) {
-      if (cls != "POSIXct")
-        next # assume that utils::read.table did that right thing
-    }
-
-    x <- table[, col.idx]
-        
-    orders <- which.orders(x)
+    col <- x[, i]
+    orders <- which.orders(col, force=force)
     tz <- options::get_option(date.reader$tz, 'UTC')
     if (!is.na(orders)) {
-      x <- lubridate::parse_date_time(x, orders, tz=tz)
-      table[, col.idx] <- x
+      col <- lubridate::parse_date_time(col, orders, tz=tz)
+      x[, i] <- col
       next
     }
   }
+  return(x)
+}
+
+#' @rdname parse.dates
+#' @method parse.dates default
+#' @export
+
+parse.dates.default <- function(x, ...) {
+  x <- as.character(x)
+  parse.dates(x, ...)
+}
+
+#' @rdname parse.dates
+#' @method parse.dates character
+#' @export
+parse.dates.character <- function(x, ...) {
+  args <- list(...)  
+  colClasses <- args[['colClasses']]
+  if (is.null(colClasses)) {
+    colClasses <- NA
+  }
+  colClasses <- colClasses[[1]]
+  tz <- args[["tz"]]
+  if (is.na(colClasses)) {
+    force = FALSE
+  } else if (colClasses == "POSIXct") {
+    force = TRUE
+  } else {
+    return(NA)
+  }
+  orders <- which.orders(x, force=force)
+  if(is.na(orders)) {
+    return(NA)
+  }
+  if (is.null(tz)) {
+    tz <- options::get_option(date.reader$tz, 'UTC')
+  }
   
-  return(table)
+  lubridate::parse_date_time(x, orders, tz=tz)
+}
+
+#' @rdname parse.dates
+#' @method parse.dates data.table
+#' @export
+parse.dates.data.table <- function(x, ...) {
+  args <- list(...)  
+  colClasses <- args[['colClasses']]
+  colClasses <- .compute.classes(colClasses, x)
+  
+  parse.dates.aux <- function(col, cls) {
+    return(parse.dates(col, colClasses = cls))
+  }
+  
+  new.cols <- mapply(parse.dates.aux, x, colClasses)
+  affected <- function(col) {
+    ! all(is.na(col))
+  }
+  
+  indices <- sapply(new.cols, affected)
+  indices <- which(indices)
+
+  new.cols <- new.cols[indices]
+  x[, indices := new.cols, with=FALSE]
+  return(x)
 }
