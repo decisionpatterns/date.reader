@@ -60,9 +60,9 @@ which.orders <- function(
 ) {
   
   # Initialization
-  autostart.actual =  min(length(x), autostart)
+  autostart.actual <-  min(length(x), autostart)
   
-  nErrors          = 
+  nErrors          <- 
     if (nErrors < 1)  # a fraction
      nErrors * autostart.actual else 
      round( nErrors*autostart.actual/autostart )
@@ -71,7 +71,6 @@ which.orders <- function(
   # Autostart subset
   indices <- round( seq(from=1, to=length(x), length.out=autostart.actual) )
   z <- x[indices]
-  
   
   formats <- lubridate::guess_formats(z, orders)
   if (is.null(formats)) {
@@ -93,8 +92,7 @@ which.orders <- function(
   if (! force) {
     # SPECIAL CASE: if all digits, don't assume it a date unless there is
     # sufficient data, or if force id TRUE
-    all.digits <- all( grepl("\\D", z) == FALSE )  # bad  
-    # all.digits <- all( ! grepl("\\D", z)  )       # okay
+    all.digits <- all( ! grepl("\\D", z) )
     if (all.digits) {
       if (autostart.actual < autostart) return(NA)
     }
