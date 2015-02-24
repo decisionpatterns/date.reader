@@ -60,9 +60,9 @@ which.orders <- function(
 ) {
   
   # Initialization
-  autostart.actual =  min(length(x), autostart)
+  autostart.actual <- min(length(x), autostart)
   
-  nErrors          = 
+  nErrors          <- 
     if (nErrors < 1)  # a fraction
      nErrors * autostart.actual else 
      round( nErrors*autostart.actual/autostart )

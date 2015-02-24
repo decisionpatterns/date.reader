@@ -84,14 +84,32 @@ parse.dates.character <- function(x, ...) {
   } else {
     return(NA)
   }
-  orders <- which.orders(x, force=force)
+  
+  # parsing parameters
+  tz <- args[["tz"]]
+  if (is.null(tz)) 
+    tz <- get_option( date.reader$tz, "UTC" )  
+  orders <- args[["orders"]]
+  if (is.null(orders)) 
+    orders <- get_option( date.reader$orders, all.orders )
+  autostart <- args[["autostart"]]
+  if (is.null(autostart))
+    autostart <- get_option( date.reader$autostart, 30 )
+  nErrors <- args[["nErrors"]]
+  if (is.null(nErrors))
+    nErrors   = get_option( date.reader$nErrors, 0 )
+
+  orders <- which.orders(
+    x
+    , orders = orders
+    , nErrors = nErrors
+    , autostart = autostart
+    , force=force)
+  
   if(is.na(orders)) {
     return(NA)
   }
-  if (is.null(tz)) {
-    tz <- options::get_option(date.reader$tz, 'UTC')
-  }
-  
+    
   lubridate::parse_date_time(x, orders, tz=tz)
 }
 

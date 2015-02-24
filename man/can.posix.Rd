@@ -12,8 +12,8 @@ can.posix(x, autostart = options::get_option(date.reader$autostart,
 \item{autostart}{integer; number of strings to check before deciding
 the format}
 
-\item{nErrors}{integer; the number of unparsable strings to allow.
-If the number of unparseable strings exceeds nErrors, return NA,
+\item{nErrors}{numeric; the fraction of unparsable strings to allow.
+If the fraction of unparseable strings exceeds nErrors, return NA,
 which means that the strings are either not dates, or not a consistent
 format.}
 }

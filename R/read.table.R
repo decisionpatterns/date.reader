@@ -28,22 +28,20 @@
 read.table <- function(file, ...) {
   args <- list(file, ...)
 
-  colClasses.old <- args[['colClasses']]
-  colClasses <- colClasses.old
+  colClasses <- args[['colClasses']]
+  if ("POSIXct" %in% colClasses) {
+    indices <- which(colClasses == "POSIXct") # will be handled later
+    colClasses[indices] <- "character"
+  }
   
-  # two cases: colClasses has named elements
-  nams <- names(colClasses)
-  nonempty.names <- setdiff(nams, "")
-  named.colClass.elements <- (length(nonempty.names) > 0)
-  
-  if (is.null(colClasses)) {
-    args[['colClasses']] <- NA
+  if (all(is.null(colClasses))) {
+    args[["colClasses"]] <- NA
   } else {
-    if ("POSIXct" %in% colClasses) {
-      indices <- which(colClasses == "POSIXct")
-      colClasses[indices] <- "character"
-    }
-    args[['colClasses']] <- colClasses
+    args[["colClasses"]] <- colClasses
+  }
+
+  for (nam in c("tz", "autostart", "nErrors", "orders")) {
+    args[[nam]] <- NULL # get rid of date-reader specific args
   }
   
   dat <- do.call(utils::read.table, args)

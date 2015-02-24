@@ -7,8 +7,8 @@
 #' @param autostart integer; number of strings to check before deciding
 #' the format
 #' 
-#' @param nErrors integer; the number of unparsable strings to allow. 
-#' If the number of unparseable strings exceeds nErrors, return NA,
+#' @param nErrors numeric; the fraction of unparsable strings to allow. 
+#' If the fraction of unparseable strings exceeds nErrors, return NA,
 #' which means that the strings are either not dates, or not a consistent
 #' format.
 #'

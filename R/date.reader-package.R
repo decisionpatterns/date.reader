@@ -40,8 +40,8 @@
 #' functions is to use "UTC". If \code{tz} is the empty string, the 
 #' local time zone is used.
 #'     
-#' \code{nErrors}: The number of allowed errors in parsing strings in a vector 
-#' before giving up. The default 
+#' \code{nErrors}: If the fraction of strings in a sample that are unparseable
+#' exceeds this number, give up, and do not attempt to convert the data to dates.
 #' 
 #' \code{autostart}: The number of strings to consider before deciding on the 
 #' date format (initially 30)
