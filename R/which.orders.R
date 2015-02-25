@@ -100,6 +100,14 @@ which.orders <- function(
     if (nErrors.actual > nErrors) return(NA)
     
   }
+  # another special case: 2-digit versus 4-digit years
+  formats <- guess_formats(z, orders)
+  y2 <- grepl("%y", formats)
+  y4 <- grepl("%Y", formats)
+  if (any(y2) && any(y4)) { # mixed formats
+    return(NA)
+  }
+  
   return(orders)
 
 }
