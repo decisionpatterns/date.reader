@@ -14,7 +14,7 @@
 #' if < 1, the fraction of values that are allowed to be unparsable before 
 #' giving up. See \strong{Details}.
 #'
-#' @param force logical; TRUE means try to interpret as date, even if number
+#' @param force logical; if \code{TRUE} interpret as date, even if number
 #' of strings is less than autostart. This is only relevant for the all-digits
 #' format: 20141222; we don't want to consider this a date unless there are
 #' sufficient data, or if force == TRUE.
