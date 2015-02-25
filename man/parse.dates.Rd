@@ -46,10 +46,12 @@ name     <- c("bob", "fred", "sally")
   class( res$birthday.character )                # "POSIXct" "POSIXt"
   class( res$birthday.factor )
 
-  dt <- setDT( df )
-  parse.dates(dt)
-  class( dt$birthday.character )                # "POSIXct" "POSIXt"
-  class( dt$birthday.factor )
+  \dontrun{
+    dt <- setDT( df )
+    parse.dates(dt)
+    class( dt$birthday.character )                # "POSIXct" "POSIXt"
+    class( dt$birthday.factor )
+  }
 }
 \seealso{
 \code{\link[base]{as.POSIXct}}

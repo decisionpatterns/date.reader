@@ -9,17 +9,17 @@ which.orders(x, orders = get_option(date.reader$orders, all.orders),
   nErrors = get_option(date.reader$nErrors, 0), force = FALSE, ...)
 }
 \arguments{
-\item{x}{character; values to convert to a POSIX date}
+\item{x}{vector; values from which orders will be determined.}
 
-\item{orders}{character; orders that can be returned}
+\item{orders}{character; allowable orders that are used.}
 
-\item{autostart}{integer; number of elements of \code{x} to check
-to determine the orders of \code{x}}
+\item{autostart}{integer; number of elements randomly sampled from of
+\code{x} to check to determine the possible orders of \code{x}.}
 
 \item{nErrors}{numeric; A non-negative number:
 if >= 1, the number of unparsable strings to allow
-if <  1, the fraction of values that are allowed to be unparsable before
-giving up.}
+if < 1, the fraction of values that are allowed to be unparsable before
+giving up. See \strong{Details}.}
 
 \item{force}{logical; TRUE means try to interpret as date, even if number
 of strings is less than autostart. This is only relevant for the all-digits
@@ -32,12 +32,15 @@ sufficient data, or if force == TRUE.}
 character, name for the date orders, e.g. mdy, ymd_hm, etc.
 }
 \description{
+detecting the date 'orders' of character vector
+}
+\details{
+\code{which.orders} returns the possible orders of \code{x}.
+
+
 If the number of unparseable strings exceeds nErrors, return NA,
 which means that the strings are either not dates, or not a consistent
 format.
-}
-\details{
-detecting the date 'orders' of character vector
 }
 \examples{
 # Same order, same format
@@ -49,7 +52,7 @@ detecting the date 'orders' of character vector
   which.orders(x, autostart=3, nErrors=1)
 
   which.orders( 20150101:20150131 )
-  which.orders( 20150101:20150131, autostart = 50  )
+  which.orders( 20150101:20150131, autostart = 50  )  # ??
   which.orders( 2015001:2015365 )   # NA
 }
 \seealso{

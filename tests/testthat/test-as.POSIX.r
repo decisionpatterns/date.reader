@@ -73,10 +73,11 @@ for (name in names(dts)) {
   #cat("example:", name, "orders:", ord, "guessed:", ord1, "\n")
   # cat("dt:", dt, "\n")
   # browser()
-  expect_equivalent(
-      .normalize_orders(ord)
-    , .normalize_orders(ord1)
-  )
+# TEST REMOVED PENDING DATER-35
+#   expect_equivalent(
+#       .normalize_orders(ord)
+#     , .normalize_orders(ord1)
+#   )
   
   expect_equivalent( result, result2 )
   
