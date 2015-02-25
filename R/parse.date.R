@@ -35,9 +35,7 @@ NULL
   , tz     = get_option( date.reader$tz, 'UTC' )
 ) {
   
-  if (is.na(order)) {
-    return(NA)
-  }
+  if( is.na(order) ) return(NA)
   
   order <- tolower(order)
    
@@ -85,17 +83,20 @@ NULL
 #'  
 #' @rdname parse.date
 #' @import options
+
 .parse.date.hetero <- function(
     txt
   , orders = get_option( date.reader$orders, all.orders )
   , tz = options::get_option( date.reader$tz, 'UTC' )
   , force = TRUE
 ) {
+
   fun <- function(x) {
     ord <- which.orders(x, orders=orders, force=force)
     .parse.date.strict(x, ord, tz=tz)
   }
-  do.call("c", lapply(txt, fun))
+  do.call( "c", lapply(txt, fun) )
+  
 }
 
 
@@ -103,9 +104,7 @@ NULL
 kMonthWords <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct","nov","dec")
 
 #' @rdname parse.date
-kMonthName <- paste(
-    c("((", paste(kMonthWords, collapse=")|("), "))"), collapse="")
-
+kMonthName <- paste( c( "((", paste(kMonthWords, collapse=")|("), "))" ), collapse="")
 
 
 #' .get_month_num
@@ -119,12 +118,14 @@ kMonthName <- paste(
 #' @note Internal function, not exported
 
 .get_month_num <- function(txtstr) {
+  
   txtstr <- tolower(txtstr)
-  res <- regexpr(kMonthName, txtstr)
-  if (res == -1) return(-1)
-  txtstr <- substr(txtstr, res, res+2)
-  return(which(kMonthWords==txtstr))
+  res <- regexpr( kMonthName, txtstr )
+  if(res == -1) return(-1)
+  txtstr <- substr( txtstr, res, res+2 )
+  return( which(kMonthWords==txtstr) )
 }
+
 
 #' @rdname parse.date
 all.orders <- c(

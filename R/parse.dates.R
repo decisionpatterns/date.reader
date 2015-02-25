@@ -129,10 +129,8 @@ parse.dates.data.table <- function( x, ... ) {
   colClasses <- args[['colClasses']]
   colClasses <- .compute.classes( colClasses, x )
   
-  parse.dates.aux <- 
-    
-  
-  
+  # parse.dates.aux <- function(col, cls) parse.dates(col, colClasses = cls)
+
   new.cols <- 
     mapply( 
         function(col, cls) parse.dates( col, colClasses = cls )
@@ -144,7 +142,7 @@ parse.dates.data.table <- function( x, ... ) {
   indices <- which(indices)
 
   new.cols <- new.cols[indices]
-  x[, indices := new.cols, with=FALSE]
+  x[ , indices := new.cols, with=FALSE ]
   return(x)
   
 }
