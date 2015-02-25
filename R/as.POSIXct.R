@@ -43,6 +43,7 @@ as.POSIXct <- function(
 
 #' @rdname as.POSIXct
 #' @method as.POSIXct character
+#' @importFrom lubridate parse_date_time
 #' @export
 
 as.POSIXct.character <- function( 
@@ -55,9 +56,11 @@ as.POSIXct.character <- function(
   return( lubridate::parse_date_time(x, orders, tz=tz) )
 }
 
+
 #' @rdname as.POSIXct
 #' @method as.POSIXct factor
 #' @export
+
 as.POSIXct.factor <- function( 
     x
   , tz=options::get_option( date.reader$tz, "UTC")

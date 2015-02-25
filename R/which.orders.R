@@ -48,6 +48,7 @@
 #'   which.orders( 2015001:2015365 )   # NA
 #'                
 #' @import options    
+#' @importFrom lubridate guess_formats
 #' @export
   
 which.orders <- function( 

@@ -53,8 +53,7 @@
 #' 
 #' @examples 
 #'   # -tk
-#'   
-#' @import lubridate options   
+#'    
 #' @docType package
 
 NULL

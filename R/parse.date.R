@@ -28,6 +28,7 @@ NULL
 #'   \code{\link[base]{as.POSIXct}}
 #'      
 #' @rdname parse.date
+#' @importFrom lubridate parse_date_time
 
 .parse.date.strict <- function( 
     txt

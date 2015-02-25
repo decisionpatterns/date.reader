@@ -28,6 +28,7 @@
 #' @note this function will only attempt to convert a vector to POSIXct if every
 #' item in the vector has the same format.
 #' 
+#' @importFrom lubridate parse_date_time
 #' @export
 
 type.convert <- function(x, ...) {
